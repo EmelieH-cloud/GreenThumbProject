@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GreenThumbProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GreenThumbProject.Data
 {
@@ -11,6 +12,21 @@ namespace GreenThumbProject.Data
         {
             _context = context;
             _dbSet = context.Set<T>();
+        }
+
+        public async Task<Garden?> GetGardenByUserIdAsync(int enteredUserId)
+        {
+            var garden = await _dbSet.OfType<Garden>().FirstOrDefaultAsync(g => g.UserId == enteredUserId);
+            if (garden != null)
+            {
+                return garden;
+            }
+
+            else
+            {
+                return null;
+            }
+
         }
 
         public async Task<T?> GetByIdAsync(int id)

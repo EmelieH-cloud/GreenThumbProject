@@ -15,6 +15,7 @@ namespace GreenThumbProject.Windows
         public AddPlantWindow()
         {
             InitializeComponent();
+
             MyDBContext context = new MyDBContext();
             _unitOfWork = new GreenThumbUOW(context);
         }
