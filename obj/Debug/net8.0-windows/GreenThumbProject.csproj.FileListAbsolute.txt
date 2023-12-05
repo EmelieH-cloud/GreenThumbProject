@@ -63,3 +63,5 @@ C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\Windows\Pl
 C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\Windows\UsersWindow.baml
 C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\Windows\PlantDetailsWindow.g.cs
 C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\Windows\PlantDetailsWindow.baml
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\Windows\AddPlantWindow.g.cs
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\Windows\AddPlantWindow.baml

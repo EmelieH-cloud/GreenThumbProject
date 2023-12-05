@@ -34,7 +34,7 @@ namespace GreenThumbProject
             // Om användaren vill logga in som vanlig user, öppna MyGardenWindow.
             else if (potentialUser != null && potentialUser.UserName != "AdminUser" && potentialUser.Password != "AdminPassword")
             {
-                MyGardenWindow mygarden = new MyGardenWindow();
+                MyGardenWindow mygarden = new MyGardenWindow(potentialUser);
                 mygarden.Show();
                 Close();
             }

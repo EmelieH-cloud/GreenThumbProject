@@ -71,6 +71,12 @@ namespace GreenThumbProject.Windows
                 Plants.Clear(); // datagrid hämtar data från observableCollection: Plants 
                 Plants.Add(identifiedPlant);
             }
+
+            else if (identifiedPlant == null)
+            {
+                MessageBox.Show("Plant not found");
+                txtSearchTerm.Text = "";
+            }
         }
 
         private async void btnClearFilter_Click(object sender, RoutedEventArgs e)
@@ -95,6 +101,38 @@ namespace GreenThumbProject.Windows
                 plantDetailsWindow.Show();
                 Close();
             }
+            else
+            {
+                MessageBox.Show("Please select a plant in the list");
+            }
+        }
+
+        private async void btnDeletePlant_Click(object sender, RoutedEventArgs e)
+        {
+            // Om valt item är en Plant 
+            if (DatagridPlants.SelectedItem is Plant chosenPlant)
+            {
+                MessageBoxResult result = MessageBox.Show($"Do you want to delete {chosenPlant.PlantName}?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    int plantid = chosenPlant.PlantId;
+                    await _unitOfWork.PlantRepository.DeleteAsync(plantid);
+                    await _unitOfWork.Complete(); // Spara ändringarna 
+                    await LoadPlantsAsync();
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Please select a plant in the list");
+            }
+        }
+
+        private void btnAddPlantsWindow_Click(object sender, RoutedEventArgs e)
+        {
+            AddPlantWindow addplantwindow = new AddPlantWindow();
+            addplantwindow.Show();
+            Close();
         }
     }
 }

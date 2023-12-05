@@ -11,5 +11,9 @@
         public List<Instruction> Instructions { get; set; } = new(); // one-to-many relationen mellan Instruktion och Planta. 
 
         public List<PlantGarden> PlantGardens { get; set; } = new(); // many-to-many relationship with Garden
+
+
     }
+
+
 }

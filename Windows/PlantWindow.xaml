@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenThumbProject.Windows"
         mc:Ignorable="d"
-        Title="PlantWindow" Loaded="Window_Loaded" Height="480" WindowStartupLocation="CenterScreen" Width="700" WindowStyle="None"  AllowsTransparency="True" Background="Transparent">
+        Title="PlantWindow" Loaded="Window_Loaded" Height="480" WindowStartupLocation="CenterScreen" Width="750" WindowStyle="None"  AllowsTransparency="True" Background="Transparent">
     <Window.Resources>
         <Style x:Key="HeaderText" TargetType="TextBlock">
             <Setter Property="FontSize" Value="34"/>
@@ -24,7 +24,6 @@
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Width" Value="160"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-            <Setter Property="Margin" Value="0 8"/>
             <Setter Property="Foreground" Value="MintCream"/>
             <Setter Property="Background" Value="DarkGreen"/>
             <Setter Property="Template">
@@ -63,6 +62,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -77,13 +78,14 @@
                     <DataGridTextColumn Width="*" Header="Product Name" Binding="{Binding PlantName}" />
                 </DataGrid.Columns>
             </DataGrid>
-            <Label Content="Search plant:" FontSize="18" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <TextBox VerticalContentAlignment="Center" HorizontalContentAlignment="Center" x:Name="txtSearchTerm" Grid.Column="1" Grid.ColumnSpan="2" Height="40" VerticalAlignment="Center"/>
-            <Button x:Name="btnSearchPlant" Grid.Column="3" Content="Go" Height="50" Width="60" Style="{StaticResource Buttons}" Click="btnSearchPlant_Click"/>
-            <Button x:Name="btnDeletePlant" Grid.Column="4" Height="50" Width="90" Grid.Row="3" Style="{StaticResource Buttons}" Content="Delete plant" FontSize="11"/>
-            <Button x:Name="btnDetailsPlant" Grid.Column="4" Height="50" Width="90" Grid.Row="2" Style="{StaticResource Buttons}" Content="Plant details" FontSize="11" Click="btnDetailsPlant_Click"/>
-            <Button x:Name="btnClearFilter" FontSize="11" Content="Clear search" Height="50" Width="90" Style="{StaticResource Buttons}" Grid.Column="4" Click="btnClearFilter_Click"/>
-            <Button x:Name="btnReturn" Grid.Column="4" Height="40" Width="70"  Grid.Row="4" Content="Return" Click="btnReturn_Click"/>
+            <Label Content="Search plant:" Grid.ColumnSpan="2" FontSize="18" FontWeight="Bold" Foreground="White"/>
+            <TextBox VerticalContentAlignment="Center" HorizontalContentAlignment="Center" x:Name="txtSearchTerm" Grid.Column="0" Grid.ColumnSpan="2" Height="40" VerticalAlignment="Bottom"/>
+            <Button x:Name="btnSearchPlant" Grid.Column="2" Content="Go" Height="50" Width="60" Style="{StaticResource Buttons}" Click="btnSearchPlant_Click"  FontWeight="Bold" VerticalAlignment="Bottom" BorderBrush="#FF060000"/>
+            <Button x:Name="btnDeletePlant" Grid.Column="5" Height="50" Width="90" Grid.Row="4" Style="{StaticResource Buttons}" Content="Delete plant" FontSize="11" Click="btnDeletePlant_Click" Background="#FFCA1D18"/>
+            <Button x:Name="btnDetailsPlant" Grid.Column="4" Height="50" Width="90" Grid.Row="4" Style="{StaticResource Buttons}" Content="Plant details" FontSize="11" Click="btnDetailsPlant_Click" Background="#FF3340C0"/>
+            <Button x:Name="btnAddPlantsWindow" Grid.Column="6" Height="50" Width="90" Grid.Row="4" Style="{StaticResource Buttons}" Content="Add plants" FontSize="11" Click="btnAddPlantsWindow_Click" />
+            <Button x:Name="btnClearFilter"  FontSize="12" Content="Clear search" Height="50" Width="100" Style="{StaticResource Buttons}" Grid.Column="3" Click="btnClearFilter_Click" FontWeight="Bold" VerticalAlignment="Bottom"/>
+            <Button x:Name="btnReturn" Grid.Column="6" Height="40" Width="70"  Grid.Row="0" Content="Return" Click="btnReturn_Click"/>
         </Grid>
     </Border>
 </Window>

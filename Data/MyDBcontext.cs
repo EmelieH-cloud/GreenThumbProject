@@ -34,6 +34,13 @@ namespace GreenThumbProject.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // När en planta tas bort så ska även dess instruktioner tas bort. 
+            modelBuilder.Entity<Plant>()
+           .HasMany(p => p.Instructions)
+            .WithOne(i => i.Plant)
+           .HasForeignKey(i => i.PlantId)
+           .OnDelete(DeleteBehavior.Cascade);
+
             base.OnModelCreating(modelBuilder);
             modelBuilder.UseEncryption(_provider); // Kryptering 
 
@@ -67,14 +74,15 @@ namespace GreenThumbProject.Data
             modelBuilder.Entity<User>().HasData(
                 new User { UserId = 1, UserName = "User1", Password = "EncryptedPassword1" },
                 new User { UserId = 2, UserName = "User2", Password = "EncryptedPassword2" },
-                new User { UserId = 3, UserName = "AdminUser", Password = "AdminPassword" }
+                new User { UserId = 3, UserName = "AdminUser", Password = "AdminPassword" },
+                 new User { UserId = 4, UserName = "User3", Password = "EncryptedPassword3" }
             );
 
             // Gardens
             modelBuilder.Entity<Garden>().HasData(
                 new Garden { GardenId = 1, UserId = 1, Name = "Rose Lily Garden" },
                 new Garden { GardenId = 2, UserId = 2, Name = "Zen Garden" },
-                new Garden { GardenId = 3, UserId = 3, Name = "Secret Garden" }
+                new Garden { GardenId = 3, UserId = 4, Name = "Secret Garden" }
             );
 
             // Plants
@@ -152,7 +160,11 @@ namespace GreenThumbProject.Data
         new Instruction { InstructionId = 17, PlantId = 17, Content = "Repotting should be done twice a year" },
         new Instruction { InstructionId = 18, PlantId = 17, Content = "Remove dead leaves twice a week" },
         new Instruction { InstructionId = 19, PlantId = 20, Content = "No fertilizer" },
-        new Instruction { InstructionId = 20, PlantId = 20, Content = "Prone to dry out, water generously" }
+        new Instruction { InstructionId = 20, PlantId = 20, Content = "Prone to dry out, water generously" },
+        new Instruction { InstructionId = 21, PlantId = 2, Content = "Prone to dry out, water generously" },
+        new Instruction { InstructionId = 22, PlantId = 4, Content = "Prone to dry out, water generously" },
+        new Instruction { InstructionId = 23, PlantId = 6, Content = "Prone to dry out, water generously" },
+         new Instruction { InstructionId = 24, PlantId = 12, Content = "Prone to dry out, water generously" }
             );
 
         }

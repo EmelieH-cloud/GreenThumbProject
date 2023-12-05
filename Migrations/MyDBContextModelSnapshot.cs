@@ -60,7 +60,7 @@ namespace GreenThumbProject.Migrations
                         {
                             GardenId = 3,
                             Name = "Secret Garden",
-                            UserId = 3
+                            UserId = 4
                         });
                 });
 
@@ -205,6 +205,30 @@ namespace GreenThumbProject.Migrations
                             InstructionId = 20,
                             Content = "Prone to dry out, water generously",
                             PlantId = 20
+                        },
+                        new
+                        {
+                            InstructionId = 21,
+                            Content = "Prone to dry out, water generously",
+                            PlantId = 2
+                        },
+                        new
+                        {
+                            InstructionId = 22,
+                            Content = "Prone to dry out, water generously",
+                            PlantId = 4
+                        },
+                        new
+                        {
+                            InstructionId = 23,
+                            Content = "Prone to dry out, water generously",
+                            PlantId = 6
+                        },
+                        new
+                        {
+                            InstructionId = 24,
+                            Content = "Prone to dry out, water generously",
+                            PlantId = 12
                         });
                 });
 
@@ -535,6 +559,12 @@ namespace GreenThumbProject.Migrations
                             UserId = 3,
                             Password = "dWqvyilRa8xuX6cGYGvknQ==",
                             UserName = "AdminUser"
+                        },
+                        new
+                        {
+                            UserId = 4,
+                            Password = "f7GpZqie1tOnESRrxJeVxF+5WN2U/Qle9gD5CaIm1E8=",
+                            UserName = "User3"
                         });
                 });
 

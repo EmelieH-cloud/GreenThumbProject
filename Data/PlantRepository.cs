@@ -15,9 +15,28 @@ namespace GreenThumbProject.Data
             _dbSet = context.Set<T>();
         }
 
+        // PlantNameIsTakenAsync
+        // Returnerar true om namnet är upptaget, false om det är ledigt. 
+        public async Task<Boolean> PlantNameIsTakenAsync(string enteredPlant)
+        {
+
+            var plant =
+            await _dbSet.OfType<Plant>().SingleOrDefaultAsync(p => p.PlantName.ToLower() == enteredPlant.ToLower());
+
+            if (plant != null)
+            {
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
+
+        }
 
         // SearchPlantsAsync
-        // Metod som undersöker om det sökta namnet motsvarar en växt i databasen. 
+        // Metod som undersöker om det sökta namnet motsvarar en plant i databasen. 
         public async Task<Plant?> SearchPlantAsync(string enteredPlant)
         {
             try
