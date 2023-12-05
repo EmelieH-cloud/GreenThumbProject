@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GreenThumbProject.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Windows;
 
 namespace GreenThumbProject.Data
 {
@@ -13,22 +15,47 @@ namespace GreenThumbProject.Data
             _dbSet = context.Set<T>();
         }
 
-        public async Task<T?> GetById(int id)
+        // AuthenticateCredentials()
+        // Metod som undersöker om givet användarnamn + lösen motsvaras av en user i databasen.
+        public async Task<User?> AuthenticateCredentialsAsync(string enteredUsername, string enteredPassword)
+        {
+            try
+            {
+                var user =
+                await _dbSet.OfType<User>().SingleOrDefaultAsync(u => u.UserName == enteredUsername && u.Password == enteredPassword);
+
+                if (user != null)
+                {
+                    return user;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+        }
+
+        public async Task<T?> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);
 
         }
-        public async Task<List<T>> GetAll()
+        public async Task<List<T>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }
 
-        public async Task Add(T entity)
+        public async Task AddAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             var entityToDelete = await _dbSet.FindAsync(id);
 

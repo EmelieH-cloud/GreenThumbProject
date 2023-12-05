@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GreenThumbProject.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Windows;
 
 namespace GreenThumbProject.Data
 {
@@ -13,22 +15,49 @@ namespace GreenThumbProject.Data
             _dbSet = context.Set<T>();
         }
 
-        public async Task<T?> GetById(int id)
+
+        // SearchPlantsAsync
+        // Metod som undersöker om det sökta namnet motsvarar en växt i databasen. 
+        public async Task<Plant?> SearchPlantAsync(string enteredPlant)
+        {
+            try
+            {
+                var plant =
+                await _dbSet.OfType<Plant>().SingleOrDefaultAsync(p => p.PlantName.ToLower() == enteredPlant.ToLower());
+
+                if (plant != null)
+                {
+                    return plant;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+
+        }
+
+        public async Task<T?> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);
 
         }
-        public async Task<List<T>> GetAll()
+        public async Task<List<T>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }
 
-        public async Task Add(T entity)
+        public async Task AddAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             var entityToDelete = await _dbSet.FindAsync(id);
 

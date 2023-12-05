@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\User\repos\Newton\GreenThumbProject\App.xaml
-11407045341
+61132059219
 
-20-1451071059
+391215453492
 219328145973
-MainWindow.xaml;
+MainWindow.xaml;Windows\AdminView.xaml;Windows\MyGardenWindow.xaml;Windows\PlantDetailsWindow.xaml;Windows\PlantWindow.xaml;Windows\UsersWindow.xaml;
 
-False
+True
 

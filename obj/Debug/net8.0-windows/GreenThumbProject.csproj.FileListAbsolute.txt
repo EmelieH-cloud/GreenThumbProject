@@ -52,3 +52,14 @@ C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\refint\Gre
 C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\GreenThumbProject.pdb
 C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\GreenThumbProject.genruntimeconfig.cache
 C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\ref\GreenThumbProject.dll
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\Windows\AdminView.g.cs
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\Windows\MyGardenWindow.g.cs
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\Windows\AdminView.baml
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\Windows\MyGardenWindow.baml
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\GreenThumbProject.sourcelink.json
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\Windows\PlantWindow.g.cs
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\Windows\UsersWindow.g.cs
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\Windows\PlantWindow.baml
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\Windows\UsersWindow.baml
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\Windows\PlantDetailsWindow.g.cs
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows\Windows\PlantDetailsWindow.baml

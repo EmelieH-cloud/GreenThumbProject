@@ -13,22 +13,22 @@ namespace GreenThumbProject.Data
             _dbSet = context.Set<T>();
         }
 
-        public async Task<T?> GetById(int id)
+        public async Task<T?> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);
 
         }
-        public async Task<List<T>> GetAll()
+        public async Task<List<T>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }
 
-        public async Task Add(T entity)
+        public async Task AddAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             var entityToDelete = await _dbSet.FindAsync(id);
 
