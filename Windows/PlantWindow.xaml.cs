@@ -38,7 +38,12 @@ namespace GreenThumbProject.Windows
                 // Lägg till varje planta till observablelist. 
                 foreach (var plant in plants)
                 {
-                    Plants.Add(plant);
+                    if (!Plants.Any(plnt => plnt.PlantName == plant.PlantName))
+                    {
+                        // Lägg bara till plantan om namnet inte redan finns i listan! 
+                        Plants.Add(plant);
+                    }
+
                 }
             }
             catch (Exception ex)

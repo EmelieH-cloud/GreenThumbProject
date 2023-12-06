@@ -77,6 +77,7 @@
             <Button x:Name="btnGardenDatabase" Content="Manage gardens" Width="131" Grid.Column="0"  Grid.Row="3" Style="{StaticResource Buttons}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="11"/>
             <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Text="Explore plants in our database using the plant search feature. Navigate to the 'AddPlantWindow' to add plants. Remove plants with the 'Delete' button. Deleting a plant will also remove its associated care instructions from the database." TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="4" Text="Easily oversee and manage user accounts with the 'Manage Users' feature. Navigate through user information and modify user details according to request." TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button x:Name="btnReturn" Grid.Column="4" Grid.Row="4" Width="70" Height="50" Content="Return" Click="btnReturn_Click"/>
         </Grid>
     </Border>
 </Window>

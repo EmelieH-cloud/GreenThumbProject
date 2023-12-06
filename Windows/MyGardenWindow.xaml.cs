@@ -90,10 +90,6 @@ namespace GreenThumbProject.Windows
                         newGardenPlant.Details = chosenPlant.Details;
                         newGardenPlant.Instructions = chosenPlant.Instructions;
 
-                        // Lägg till den nya plantan i databasen.
-                        await _unitOfWork.PlantRepository.AddAsync(newGardenPlant);
-                        await _unitOfWork.Complete();
-
                         // Skapa en ny instans av PlantGarden. 
                         PlantGarden newPg = new PlantGarden();
                         newPg.Garden = potentialGarden;
@@ -122,5 +118,32 @@ namespace GreenThumbProject.Windows
             }
         }
 
+        private void btnReturn_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            Close();
+        }
+
+        private void btnDetails_Click(object sender, RoutedEventArgs e)
+        {
+            // Hämta listviewitem 
+            ListViewItem item = (ListViewItem)lstplants.SelectedItem;
+            if (item != null)
+            {
+                // Casta till plantgarden 
+                PlantGarden pg = (PlantGarden)item.Tag;
+                if (pg != null)
+                {
+                    // Hämta plant 
+                    Plant plant = pg.Plant;
+                    // Skicka med usern till detailswindow 
+                    GardenPlantDetailsWindow gpd = new GardenPlantDetailsWindow(plant, _user);
+                    gpd.Show();
+                    Close();
+
+                }
+            }
+        }
     }
 }

@@ -66,3 +66,5 @@ C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net6.0-windows7.0\refint\
 C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net6.0-windows7.0\GreenThumbProject.pdb
 C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net6.0-windows7.0\GreenThumbProject.genruntimeconfig.cache
 C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net6.0-windows7.0\ref\GreenThumbProject.dll
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net6.0-windows7.0\Windows\GardenPlantDetailsWindow.g.cs
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net6.0-windows7.0\Windows\GardenPlantDetailsWindow.baml

@@ -13,6 +13,9 @@
     <Compile Update="Windows\AdminView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Windows\GardenPlantDetailsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\MyGardenWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -34,6 +37,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\AdminView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\GardenPlantDetailsWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\MyGardenWindow.xaml">

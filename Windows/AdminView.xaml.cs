@@ -30,5 +30,12 @@ namespace GreenThumbProject.Windows
             users.Show();
             Close();
         }
+
+        private void btnReturn_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            Close();
+        }
     }
 }
