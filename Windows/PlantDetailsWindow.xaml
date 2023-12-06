@@ -6,19 +6,16 @@
         xmlns:local="clr-namespace:GreenThumbProject.Windows"
         mc:Ignorable="d"
         Title="PlantDetailsWindow" Height="480" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Width="700" WindowStyle="None"  AllowsTransparency="True" Background="Transparent">
+    <Window.Resources>
+        <BitmapImage x:Key="plantdetail" UriSource="C:\Users\User\repos\Newton\GreenThumbProject\monstera.jpg"/>
+    </Window.Resources>
     <Border CornerRadius="35" BorderThickness="24">
         <Border.BorderBrush>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="LightGreen" Offset="0.8"/>
-                <GradientStop Color="green" Offset="0.2"/>
-            </LinearGradientBrush>
+            <SolidColorBrush Color="green"/>
         </Border.BorderBrush>
-        <Grid x:Name="LogInGrid">
+        <Grid x:Name="detailsgrid">
             <Grid.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="LightGreen" Offset="0.8"/>
-                    <GradientStop Color="green" Offset="0.2"/>
-                </LinearGradientBrush>
+                <ImageBrush ImageSource="{StaticResource plantdetail}" Stretch="UniformToFill"/>
             </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -34,14 +31,15 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <DataGrid x:Name="dataGridInstructions" AutoGenerateColumns="False" Grid.Row="1" Margin="10" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2">
+            <DataGrid x:Name="dataGridInstructions" Height="180" AutoGenerateColumns="False" Grid.Row="1" Margin="10" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="InstructionId" Binding="{Binding InstructionId}" />
-                    <DataGridTextColumn Header="Instruction" Binding="{Binding Content}" />
+                    <DataGridTextColumn Header="InstructionId " Binding="{Binding InstructionId}" />
+                    <DataGridTextColumn Header="Instruction " Binding="{Binding Content}" />
                 </DataGrid.Columns>
             </DataGrid>
-            <TextBlock Margin="10" TextWrapping="Wrap" x:Name="txtPlantDetails" Grid.Column="1" Background="white" Grid.RowSpan="2" Grid.Row="3" Grid.ColumnSpan="3"/>
-            <Button x:Name="btnReturn"  Grid.Column="4" Grid.Row="4" Width="90" Height="50" Content="Return" Click="btnReturn_Click"/>
+            <TextBlock  Margin="10" TextWrapping="Wrap" Height="100" x:Name="txtPlantDetails" Grid.Column="1" Background="white" Grid.RowSpan="2" Grid.Row="3" Grid.ColumnSpan="3"/>
+            <Button x:Name="btnReturn"  Grid.Column="4" Grid.Row="0" Width="70" Height="40" Content="Return" Click="btnReturn_Click" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+
         </Grid>
     </Border>
 </Window>

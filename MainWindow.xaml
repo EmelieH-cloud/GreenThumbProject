@@ -7,18 +7,20 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="480" WindowStartupLocation="CenterScreen" Width="700" WindowStyle="None"  AllowsTransparency="True" Background="Transparent">
     <Window.Resources>
+        <BitmapImage x:Key="Logo" UriSource="C:\Users\User\repos\Newton\GreenThumbProject\MicrosoftTeams-image (1).png"/>
+        <BitmapImage x:Key="plants" UriSource="C:\Users\User\repos\Newton\GreenThumbProject\plants.jpg"/>
         <Style x:Key="HeaderText" TargetType="TextBlock">
             <Setter Property="FontSize" Value="34"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="TextAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="#e7e3fc"/>
+            <Setter Property="Foreground" Value="DarkGreen"/>
         </Style>
         <Style x:Key="ParagraphText" TargetType="TextBlock">
             <Setter Property="FontSize" Value="23"/>
             <Setter Property="LineHeight" Value="28"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="TextAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="#e7e3fc"/>
+            <Setter Property="Foreground" Value="DarkGreen"/>
         </Style>
         <Style x:Key="Buttons" TargetType="Button">
             <Setter Property="FontSize" Value="16"/>
@@ -26,11 +28,11 @@
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="Margin" Value="0 8"/>
             <Setter Property="Foreground" Value="MintCream"/>
-            <Setter Property="Background" Value="DarkGreen"/>
+            <Setter Property="Background" Value="#FF092A09"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="6" BorderThickness="1" Background="{TemplateBinding Background}" BorderBrush="Transparent" Padding="15">
+                        <Border CornerRadius="25" BorderThickness="1" Background="{TemplateBinding Background}" BorderBrush="Transparent" Padding="15">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -53,8 +55,10 @@
         <Grid x:Name="LogInGrid">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="LightGreen" Offset="0.8"/>
-                    <GradientStop Color="green" Offset="0.2"/>
+
+                    <GradientStop Color="green" Offset="0.65"/>
+                    <GradientStop Color="#2BB516" Offset="0.65"/>
+                    <GradientStop Color="#082107" Offset="0.1"/>
                 </LinearGradientBrush>
             </Grid.Background>
             <Grid.ColumnDefinitions>
@@ -71,15 +75,20 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Welcome to Green Thumb" Style="{StaticResource HeaderText}" Grid.ColumnSpan="5" Margin="0" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="22"/>
-            <Button x:Name="btnRegister" Width="100" Height="50" Grid.Column="3" Grid.ColumnSpan="2" Content="REGISTER" Grid.Row="4" Style="{StaticResource Buttons}"  Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Background="#FF092A09"/>
-            <Button Name="btnSignin" Grid.Column="1" Width="90" Content="SIGN IN" Style="{StaticResource Buttons}" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btnSignin_Click" />
-            <Label Content="USERNAME:" FontSize="18" Grid.Row="1" Grid.ColumnSpan="1"  Grid.RowSpan="1" Foreground="#e7e3fc" VerticalAlignment="Center" HorizontalAlignment="Center" />
-            <Label Content="PASSWORD:" FontSize="18" Grid.ColumnSpan="1"  Grid.RowSpan="1" Foreground="#e7e3fc" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" />
-            <Label Content="...NOT A MEMBER?" Foreground="#FF074907" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18"  Grid.RowSpan="2" FontWeight="Bold" VerticalAlignment="Center"/>
+            <TextBlock Text="Welcome to Green Thumb" Grid.Row="1" Foreground="#FFE9F3E9" Grid.RowSpan="1" Style="{StaticResource HeaderText}" Grid.ColumnSpan="4" Margin="0" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36"/>
+            <Button x:Name="btnRegister" Width="160" Height="50" Grid.Column="3" Grid.ColumnSpan="2" Content="REGISTER" Grid.Row="4" Style="{StaticResource Buttons}"  Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FF092A09" Click="btnRegister_Click" Margin="0,0,0,0"/>
+            <Button Name="btnSignin" Grid.Column="1" Margin="5" Height="50" Width="88" Content="SIGN IN" Style="{StaticResource Buttons}" Grid.ColumnSpan="2" Grid.RowSpan="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnSignin_Click" />
+            <Label Content="USERNAME:" FontSize="14" Grid.Row="2" Grid.ColumnSpan="1"  Grid.RowSpan="1" Foreground="white" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Center" FontWeight="Bold" HorizontalContentAlignment="Center" />
+            <Label Content="PASSWORD:" FontSize="14" Grid.ColumnSpan="1"  Grid.RowSpan="1" Foreground="white" Grid.Row="3" VerticalAlignment="Top" HorizontalAlignment="Right" VerticalContentAlignment="Center" Margin="0,0,0,4" FontWeight="Bold" HorizontalContentAlignment="Center" />
             <Label Content="" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="1" VerticalContentAlignment="Center" FontSize="16"/>
-            <TextBox Name="txtUserName" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Width="170" Height="40"  Grid.ColumnSpan="2" FontSize="16" HorizontalAlignment="Center" Text="AdminUser" VerticalAlignment="Center" TextAlignment="Center"/>
-            <TextBox Name="txtPassWord" VerticalContentAlignment="Center"  Grid.Row="2" Grid.Column="1" Width="170" Height="40" Grid.ColumnSpan="2" FontSize="16" Text="AdminPassword" TextAlignment="Center"/>
+            <TextBox Name="txtUserName" Margin="5" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="0" Width="170" Height="40"  Grid.ColumnSpan="2" FontSize="14" HorizontalAlignment="Center" Text="AdminUser" VerticalAlignment="Center"/>
+            <TextBox Name="txtPassWord" Margin="5" VerticalContentAlignment="Center"  Grid.Row="3" Grid.Column="0" Width="170" Height="40" Grid.ColumnSpan="2" FontSize="14" Text="AdminPassword" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <StackPanel Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="3" Grid.Column="3" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="{StaticResource Logo}" Width="180" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5">
+                <Image Source="{StaticResource plants}"/>
+            </StackPanel>
         </Grid>
     </Border>
 </Window>

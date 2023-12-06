@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\User\repos\Newton\GreenThumbProject\App.xaml
-8509598365
+9135887039
 
-52-949484700
+54400521340
 215-960827241
-MainWindow.xaml;Windows\AddPlantWindow.xaml;Windows\AdminView.xaml;Windows\GardenPlantDetailsWindow.xaml;Windows\MyGardenWindow.xaml;Windows\PlantDetailsWindow.xaml;Windows\PlantWindow.xaml;Windows\UsersWindow.xaml;
+MainWindow.xaml;Windows\AddPlantWindow.xaml;Windows\AdminView.xaml;Windows\GardenPlantDetailsWindow.xaml;Windows\MyGardenWindow.xaml;Windows\PlantDetailsWindow.xaml;Windows\PlantWindow.xaml;Windows\RegisterWindow.xaml;Windows\UsersWindow.xaml;
 
 True
 

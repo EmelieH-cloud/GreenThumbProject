@@ -45,6 +45,27 @@ namespace GreenThumbProject.Data
             return await _dbSet.FindAsync(id);
 
         }
+
+        // UserNameIsAvailableAsync()
+        // Metod som returnerar true om namnet är ledigt, false om det är upptaget. 
+        public async Task<Boolean> UserNameIsAvailableAsync(string requestedUsername)
+        {
+            var user =
+            await _dbSet.OfType<User>().SingleOrDefaultAsync(u => u.UserName == requestedUsername);
+
+            if (user == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+
+
         public async Task<List<T>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();

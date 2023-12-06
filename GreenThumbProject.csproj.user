@@ -25,6 +25,9 @@
     <Compile Update="Windows\PlantWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Windows\RegisterWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\UsersWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -49,6 +52,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\PlantWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\RegisterWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\UsersWindow.xaml">

@@ -42,7 +42,7 @@ namespace GreenThumbProject.Data
             try
             {
                 var plant =
-                await _dbSet.OfType<Plant>().SingleOrDefaultAsync(p => p.PlantName.ToLower() == enteredPlant.ToLower());
+                await _dbSet.OfType<Plant>().FirstOrDefaultAsync(p => p.PlantName.ToLower() == enteredPlant.ToLower());
 
                 if (plant != null)
                 {
