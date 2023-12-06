@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenThumbProject.Windows"
         mc:Ignorable="d"
-        Title="GardenPlantDetailsWindow"  Height="500" WindowStartupLocation="CenterScreen" Width="750" WindowStyle="None"  AllowsTransparency="True" Background="Transparent">
+        Title="GardenPlantDetailsWindow" Loaded="Window_Loaded"  Height="500" WindowStartupLocation="CenterScreen" Width="750" WindowStyle="None"  AllowsTransparency="True" Background="Transparent">
     <Border CornerRadius="35" BorderThickness="24">
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">

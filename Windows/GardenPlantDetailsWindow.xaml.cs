@@ -1,7 +1,7 @@
 ﻿using GreenThumbProject.Data;
 using GreenThumbProject.Models;
-using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace GreenThumbProject.Windows
 {
@@ -14,7 +14,8 @@ namespace GreenThumbProject.Windows
         private readonly MyDBContext _dbContext;
         private readonly GreenThumbUOW _unitOfWork;
         private readonly User _user;
-        public ObservableCollection<Instruction> Instructions { get; set; }
+
+
         public GardenPlantDetailsWindow(Plant plant, User user)
         {
             InitializeComponent();
@@ -22,12 +23,10 @@ namespace GreenThumbProject.Windows
             _chosenPlant = plant;
             _dbContext = new MyDBContext();
             _unitOfWork = new GreenThumbUOW(_dbContext);
-            Instructions = new ObservableCollection<Instruction>();
-            dataGridInstructions.ItemsSource = Instructions;
-            FillWithData();
+
         }
 
-        private async void FillWithData()
+        private void FillWithData()
         {
             // Details
 
@@ -43,12 +42,15 @@ namespace GreenThumbProject.Windows
 
             // Instructions
             int plantId = _chosenPlant.PlantId;
-            List<Instruction> plantInstructions = await _unitOfWork.InstructionRepository.GetAllPlantInstructionsAsync(plantId);
+            List<Instruction> plantInstructions = _chosenPlant.Instructions;
             if (plantInstructions != null)
             {
                 foreach (var instruction in plantInstructions)
                 {
-                    Instructions.Add(instruction); // lägg till i observableCollection 
+                    ListViewItem item = new ListViewItem();
+                    item.Tag = instruction;
+                    item.Content = instruction.Content;
+                    dataGridInstructions.Items.Add(item);
                 }
             }
         }
@@ -60,6 +62,11 @@ namespace GreenThumbProject.Windows
             mygarden.Show();
             Close();
 
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            FillWithData();
         }
     }
 }

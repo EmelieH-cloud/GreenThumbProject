@@ -28,9 +28,9 @@ namespace GreenThumbProject.Windows
             var plants = await _unitOfWork.PlantRepository.GetAllAsync();
             if (plants != null)
             {
+                List<String> addedPlants = new();
                 foreach (Plant p in plants)
                 {
-                    List<String> addedPlants = new();
                     if (!addedPlants.Contains(p.PlantName))
                     {
                         // om namnet på plantan inte blivit tillagt, lägg till den. 
@@ -40,7 +40,7 @@ namespace GreenThumbProject.Windows
                         cbPlant.Tag = p;
                         cbPlant.Content = p.PlantName;
                         // Lägg till plantan till listview. 
-                        lstplants.Items.Add(cbPlant);
+                        cbAddPlantsToGarden.Items.Add(cbPlant);
                     }
                 }
 
@@ -162,16 +162,16 @@ namespace GreenThumbProject.Windows
 
         private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            // Hämta listviewitem 
-            ComboBoxItem item = (ComboBoxItem)lstplants.SelectedItem;
+            // Hämta comboboxitem
+            ListViewItem item = (ListViewItem)lstplants.SelectedItem;
             if (item != null)
             {
-                // Casta till plantgarden 
+                // Casta till plant
                 PlantGarden pg = (PlantGarden)item.Tag;
                 if (pg != null)
                 {
                     // Hämta plant 
-                    Plant plantToRemove = pg.Plant;
+                    Plant plantToRemove = (Plant)pg.Plant;
                     await _unitOfWork.PlantRepository.DeleteAsync(plantToRemove.PlantId);
                     await _unitOfWork.Complete();
                     MessageBox.Show("Selected plant was removed.");
