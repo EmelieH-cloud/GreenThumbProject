@@ -23,6 +23,11 @@ namespace GreenThumbProject.Data
 
         }
 
+        public async Task AddAsync(T entity)
+        {
+            await _dbSet.AddAsync(entity);
+        }
+
     }
 }
 

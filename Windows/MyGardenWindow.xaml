@@ -63,6 +63,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -71,9 +72,12 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Content="Welcome to your digital garden!" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Yu Gothic UI Semilight"/>
-            <Label x:Name="lblgardenAndUser" Content="Garden-name and user" Grid.Row="1" Grid.ColumnSpan="5" FontFamily="Yu Gothic UI Semilight" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label Content="Welcome to your digital garden" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" HorizontalContentAlignment="Center" FontSize="24" FontWeight="Bold"/>
+            <Label x:Name="lblgardenAndUser" Content="Hello, username" Grid.Row="0" Grid.ColumnSpan="5" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <ListView x:Name="lstplants" Grid.Row="2" Grid.RowSpan="3" Grid.ColumnSpan="3" Grid.Column="1"/>
+            <Label Content="Add plants to your garden here" Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Bottom" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <ComboBox x:Name="cbAddPlantsToGarden" Grid.Column="4" Margin="5" Grid.Row="3" Grid.ColumnSpan="2" Width="140" Height="50" HorizontalAlignment="Left"/>
+            <Button x:Name="btnaddplant" Click="btnaddplant_Click"/>
         </Grid>
     </Border>
 </Window>

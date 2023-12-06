@@ -1,0 +1,11 @@
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows7.0\GreenThumbProject.csproj.AssemblyReference.cache
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows7.0\MainWindow.g.cs
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows7.0\Windows\AddPlantWindow.g.cs
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows7.0\Windows\AdminView.g.cs
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows7.0\Windows\MyGardenWindow.g.cs
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows7.0\Windows\PlantDetailsWindow.g.cs
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows7.0\Windows\PlantWindow.g.cs
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows7.0\Windows\UsersWindow.g.cs
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows7.0\App.g.cs
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows7.0\GreenThumbProject_MarkupCompile.cache
+C:\Users\User\repos\Newton\GreenThumbProject\obj\Debug\net8.0-windows7.0\GreenThumbProject_MarkupCompile.lref
