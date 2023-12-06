@@ -8,5 +8,7 @@
 
         public int GardenId { get; set; }
         public Garden Garden { get; set; } = null!;
+
+
     }
 }

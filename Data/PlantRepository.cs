@@ -16,7 +16,7 @@ namespace GreenThumbProject.Data
         }
 
         // PlantNameIsTakenAsync
-        // Returnerar true om namnet är upptaget, false om det är ledigt. 
+        // Returnerar true om namnet är upptaget, false om namnet är ledigt. 
         public async Task<Boolean> PlantNameIsTakenAsync(string enteredPlant)
         {
 
@@ -61,15 +61,16 @@ namespace GreenThumbProject.Data
 
         }
 
-        public async Task<T?> GetByIdAsync(int id)
+        public async Task<Plant?> GetByIdAsync(int id)
         {
-            return await _dbSet.FindAsync(id);
+            return await _dbSet.OfType<Plant>().FirstOrDefaultAsync(plant => plant.PlantId == id);
 
         }
         public async Task<List<T>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }
+
 
         public async Task AddAsync(T entity)
         {

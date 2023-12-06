@@ -7,6 +7,8 @@ namespace GreenThumbProject.Data
         public GardenRepository<Garden> GardenRepository { get; }
         public PlantRepository<Plant> PlantRepository { get; }
         public UserRepository<User> UserRepository { get; }
+
+        public PlantGardenRepository<PlantGarden> PlantGardenRepository { get; }
         public InstructionRepository<Instruction> InstructionRepository { get; }
 
         private readonly MyDBContext _DBcontext;
@@ -18,6 +20,7 @@ namespace GreenThumbProject.Data
             PlantRepository = new(context);
             InstructionRepository = new(context);
             GardenRepository = new(context);
+            PlantGardenRepository = new(context);
         }
 
         public async Task Complete()

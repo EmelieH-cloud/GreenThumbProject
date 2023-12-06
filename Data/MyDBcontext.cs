@@ -75,7 +75,7 @@ namespace GreenThumbProject.Data
                 new User { UserId = 1, UserName = "User1", Password = "EncryptedPassword1" },
                 new User { UserId = 2, UserName = "User2", Password = "EncryptedPassword2" },
                 new User { UserId = 3, UserName = "AdminUser", Password = "AdminPassword" },
-                 new User { UserId = 4, UserName = "User3", Password = "EncryptedPassword3" }
+                 new User { UserId = 4, UserName = "User4", Password = "EncryptedPassword4" }
             );
 
             // Gardens

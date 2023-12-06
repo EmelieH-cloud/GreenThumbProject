@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GreenThumbProject.Windows"
         mc:Ignorable="d"
-        Title="MyGardenWindow" Height="550" Width="900"  WindowStartupLocation="CenterScreen"  WindowStyle="None"  AllowsTransparency="True" Background="Transparent">
+        Title="MyGardenWindow" Loaded="Window_Loaded" Height="550" Width="900"  WindowStartupLocation="CenterScreen"  WindowStyle="None"  AllowsTransparency="True" Background="Transparent">
     <Window.Resources>
         <Style x:Key="HeaderText" TargetType="TextBlock">
             <Setter Property="FontSize" Value="34"/>
@@ -73,7 +73,7 @@
             </Grid.RowDefinitions>
             <Label Content="Welcome to your digital garden!" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" HorizontalContentAlignment="Center" FontSize="36" FontFamily="Yu Gothic UI Semilight"/>
             <Label x:Name="lblgardenAndUser" Content="Garden-name and user" Grid.Row="1" Grid.ColumnSpan="5" FontFamily="Yu Gothic UI Semilight" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <DataGrid x:Name="datagridGarden"  Grid.Row="2" Grid.RowSpan="3" Grid.ColumnSpan="3" Grid.Column="1"/>
+            <ListView x:Name="lstplants" Grid.Row="2" Grid.RowSpan="3" Grid.ColumnSpan="3" Grid.Column="1"/>
         </Grid>
     </Border>
 </Window>

@@ -563,8 +563,8 @@ namespace GreenThumbProject.Migrations
                         new
                         {
                             UserId = 4,
-                            Password = "f7GpZqie1tOnESRrxJeVxF+5WN2U/Qle9gD5CaIm1E8=",
-                            UserName = "User3"
+                            Password = "f7GpZqie1tOnESRrxJeVxKYlBReYbSiGLAC2K1lMUnQ=",
+                            UserName = "User4"
                         });
                 });
 

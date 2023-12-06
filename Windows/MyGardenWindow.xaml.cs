@@ -1,6 +1,7 @@
 ﻿using GreenThumbProject.Data;
 using GreenThumbProject.Models;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace GreenThumbProject.Windows
 {
@@ -24,9 +25,28 @@ namespace GreenThumbProject.Windows
         {
             Garden? potentialGarden = await _unitOfWork.GardenRepository.GetGardenByUserIdAsync(_user.UserId);
             if (potentialGarden != null)
-            { // om usern har en trädgård så ska alla växter i den displayas i datagrid. 
-
+            { // Om det finns en garden med detta userId, hämta alla plantgardens som har detta gardenId.  
+                var plantgardens = await _unitOfWork.PlantGardenRepository.GetPlantGardenbyGardenIdAsync(potentialGarden.GardenId);
+                if (plantgardens != null)
+                {
+                    foreach (var plantgarden in plantgardens)
+                    {
+                        ListViewItem listViewItem = new ListViewItem();
+                        listViewItem.Tag = plantgarden;
+                        Plant? plantToDisplay = await _unitOfWork.PlantRepository.GetByIdAsync(plantgarden.PlantId);
+                        if (plantToDisplay != null)
+                        {
+                            listViewItem.Content = $"{plantToDisplay.PlantName}";
+                            lstplants.Items.Add(listViewItem);
+                        }
+                    }
+                }
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            FillGardenData();
         }
     }
 }
