@@ -46,15 +46,17 @@
     <Border CornerRadius="35" BorderThickness="24">
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="Yellow" Offset="0.8"/>
-                <GradientStop Color="LightPink" Offset="0.2"/>
+                <GradientStop Color="#53BA77" Offset="0.8"/>
+                <GradientStop Color="#1F5A34" Offset="0.2"/>
             </LinearGradientBrush>
         </Border.BorderBrush>
         <Grid x:Name="LogInGrid">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="yellow" Offset="0.8"/>
-                    <GradientStop Color="LightYellow" Offset="0.2"/>
+                    <GradientStop Color="#53BA77" Offset="0.8"/>
+                    <GradientStop Color="white" Offset="0.8"/>
+                    <GradientStop Color="#03431A" Offset="0.4"/>
+                    <GradientStop Color="#1F5A34" Offset="0.5"/>
                 </LinearGradientBrush>
             </Grid.Background>
             <Grid.ColumnDefinitions>
@@ -72,13 +74,15 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Content="Welcome to your digital garden" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" FontSize="24" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left"/>
-            <Label x:Name="lblgardenAndUser" Content="Hello, username" Margin="5" Grid.Row="0" Grid.ColumnSpan="4" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
-            <ListView x:Name="lstplants" Grid.Row="2" Margin="5" Grid.RowSpan="3" Grid.ColumnSpan="2" Grid.Column="0"/>
-            <Label Content="Add plants to your garden here" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Bottom" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-            <ComboBox x:Name="cbAddPlantsToGarden" Grid.Column="2" Margin="5" Grid.Row="3" Grid.ColumnSpan="2" Width="140" Height="40" HorizontalAlignment="Left" BorderBrush="#FF4E0909"/>
-            <Button x:Name="btnaddplant" Style="{StaticResource Buttons}" Content="Add" Click="btnaddplant_Click" Grid.Column="3" Grid.Row="3" Height="50" Width="80" Background="#FF218BA2"/>
-            <Button x:Name="btnReturn" Height="40" Width="80" Grid.Column="5" Grid.Row="4" Content="Return" FontSize="16" Click="btnReturn_Click"/>
+            <Label Name="lblgardenName" Content="Welcome to your digital garden" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" FontSize="24" FontWeight="Bold" Foreground="#FFF6EFEF" />
+            <Label x:Name="lblgardenAndUser" Content="Hello, username" Margin="5" Grid.Row="0" Grid.ColumnSpan="4" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Foreground="#FFF9F5F5" VerticalAlignment="Center"/>
+            <ListView x:Name="lstplants" Width="200" Grid.Row="2" Margin="5" Grid.RowSpan="3" Grid.ColumnSpan="2" Grid.Column="0"/>
+            <Label Content="Add plants to your garden:" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Bottom" FontSize="18" VerticalContentAlignment="Center" Foreground="#FFFFFBFB" FontWeight="Bold"/>
+            <Label Content="Remove plants from your garden:" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="2" VerticalAlignment="Bottom" FontSize="18" VerticalContentAlignment="Center" Foreground="#FFFFFBFB" FontWeight="Bold"/>
+            <Button x:Name="btnDelete" Style="{StaticResource Buttons}" Height="50" Width="90"  Grid.Column="2" Grid.Row="3" Content="Remove" VerticalAlignment="Top" HorizontalAlignment="Center" Click="btnDelete_Click"/>
+            <ComboBox x:Name="cbAddPlantsToGarden" Grid.Column="2" Margin="5" Grid.Row="2" Grid.ColumnSpan="2" Width="140" Height="40" HorizontalAlignment="Left" BorderBrush="#FF4E0909" VerticalAlignment="Top"/>
+            <Button x:Name="btnaddplant" Style="{StaticResource Buttons}" Content="Add" Click="btnaddplant_Click" Grid.Column="3" Grid.Row="2" Height="50" Width="80" VerticalAlignment="Top" Margin="0,0,0,0"/>
+            <Button x:Name="btnReturn" Style="{StaticResource Buttons}" Height="50" Width="80" Grid.Column="5" Grid.Row="4" Content="Return" FontSize="16" Click="btnReturn_Click" VerticalAlignment="Bottom"/>
             <Button x:Name="btnDetails" Height="60" Content="View plant details" Style="{StaticResource Buttons}" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="btnDetails_Click"/>
         </Grid>
     </Border>

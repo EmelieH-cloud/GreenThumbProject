@@ -23,6 +23,7 @@ namespace GreenThumbProject.Windows
             _unitOfWork = new GreenThumbUOW(_dbContext);
             Instructions = new ObservableCollection<Instruction>();
             dataGridInstructions.ItemsSource = Instructions;
+            lblplantName.Content = "Plant details: " + plant.PlantName;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

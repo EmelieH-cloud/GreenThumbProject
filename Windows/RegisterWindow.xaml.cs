@@ -39,7 +39,14 @@ namespace GreenThumbProject.Windows
                     newUser.Password = password;
                     await _unitOfWork.UserRepository.AddAsync(newUser);
                     await _unitOfWork.Complete();
-                    MessageBox.Show("User was succesfully registered.");
+
+                    Garden newGarden = new Garden();
+                    newGarden.Name = username + "'s" + " garden";
+                    newGarden.UserId = newUser.UserId;
+                    await _unitOfWork.GardenRepository.AddAsync(newGarden);
+                    await _unitOfWork.Complete();
+
+                    MessageBox.Show("New user: " + newUser.UserName + " registered with new garden: " + newGarden.Name);
                     txtPassword.Text = "";
                     txtUsername.Text = "";
 

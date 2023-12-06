@@ -46,15 +46,17 @@
     <Border CornerRadius="35" BorderThickness="24">
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="LightGreen" Offset="0.8"/>
-                <GradientStop Color="green" Offset="0.2"/>
+                <GradientStop Color="#447D58" Offset="0.8"/>
+                <GradientStop Color="#30C364" Offset="0.2"/>
+                <GradientStop Color="#4C6555" Offset="0.4"/>
             </LinearGradientBrush>
         </Border.BorderBrush>
         <Grid x:Name="LogInGrid">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="LightGreen" Offset="0.8"/>
-                    <GradientStop Color="green" Offset="0.2"/>
+                    <GradientStop Color="#447D58" Offset="0.8"/>
+                    <GradientStop Color="#30C364" Offset="0.2"/>
+                    <GradientStop Color="#4C6555" Offset="0.4"/>
                 </LinearGradientBrush>
             </Grid.Background>
             <Grid.ColumnDefinitions>
@@ -72,19 +74,19 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Content="Add a new plant" Grid.ColumnSpan="2" FontSize="22" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <Label Content="1. *Plant name:" Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Center" FontWeight="Bold" Foreground="#FFF9F7F7" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Bottom"/>
+            <Label Content="Add a new plant" Grid.ColumnSpan="3" FontSize="36" FontWeight="Bold" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label Content="1. *Plant name:" Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Right" FontWeight="Bold" Foreground="#FFF9F7F7" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Bottom"/>
             <Label Content="2. Plant details:" Grid.Column="0" Grid.Row="2" HorizontalContentAlignment="Center" FontWeight="Bold" Foreground="#FFF9F7F7" FontSize="16" VerticalContentAlignment="Bottom"/>
             <Label Content="3. Plant instruction:" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="4" FontWeight="Bold" Foreground="#FFF9F7F7" FontSize="16"/>
             <Label Content="4. Finish" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="5" FontWeight="Bold" Foreground="#FFF9F7F7" FontSize="16"/>
-            <TextBox x:Name="txtPlantName"  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Width="230" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-            <TextBox x:Name="txtDetailsofPlant" Grid.Row="2" Width="230" Background="white" Height="90" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-            <TextBox x:Name="txtInstructionforPlant" Grid.Row="3" Width="230" Background="white" Height="90" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-            <Label x:Name="lblInstructionsAdded"  Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="3" Content="0 instructions added" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold"/>
-            <Button Grid.Column="3" Height="50" Grid.ColumnSpan="2" Grid.Row="4" x:Name="btnAddinstruction" Content="Add instruction" Style="{StaticResource Buttons}" HorizontalAlignment="Center" Background="#FF94790E" Click="btnAddinstruction_Click"/>
-            <Button Grid.Column="1"  Grid.ColumnSpan="2" Width="230" Grid.Row="5" Style="{StaticResource Buttons}" HorizontalAlignment="Right" Content="COMPLETE" Click="FinishButton_Click"/>
-            <Button x:Name="btnReturn" Grid.Column="4" Grid.Row="5" Width="90" Height="40" Content="Return" Click="btnReturn_Click"/>
-            <TextBlock Grid.Column="3" Margin="5" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Text="All plants must be registered with a name. Plant details and instructions are not mandatory. Select 'ADD INSTRUCTION' to add an instruction. Select 'COMPLETE' when you are ready to register the plant." TextWrapping="Wrap" HorizontalAlignment="Right"/>
+            <TextBox x:Name="txtPlantName"  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Width="230" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox x:Name="txtDetailsofPlant" Grid.Row="2" Width="230" Background="white" Height="90" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox x:Name="txtInstructionforPlant" Grid.Row="3" Width="230" Background="white" Height="90" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+            <Label x:Name="lblInstructionsAdded"  Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="3" Content="0 instructions added" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left"/>
+            <Button Grid.Column="3" Height="50" Grid.ColumnSpan="2" Grid.Row="4" x:Name="btnAddinstruction" Content="Add instruction" Style="{StaticResource Buttons}" HorizontalAlignment="Left" Background="#FF122273" Click="btnAddinstruction_Click" Width="145"/>
+            <Button Grid.Column="1"  Grid.ColumnSpan="2" Width="230" Grid.Row="5" Style="{StaticResource Buttons}" HorizontalAlignment="Center" Content="COMPLETE" Click="FinishButton_Click"/>
+            <Button x:Name="btnReturn" Style="{StaticResource Buttons}" Grid.Column="4" Grid.Row="5" Width="90" Height="50" Content="Return" Click="btnReturn_Click"/>
+            <TextBlock Grid.Column="3" Margin="5" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="1" Text="All plants must be registered with a name. Plant details and instructions are not mandatory." TextWrapping="Wrap" HorizontalAlignment="Center" Foreground="#FFEBEBEB" VerticalAlignment="Bottom" FontSize="14"/>
         </Grid>
     </Border>
 </Window>

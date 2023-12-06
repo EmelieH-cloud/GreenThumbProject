@@ -30,10 +30,18 @@ namespace GreenThumbProject.Windows
             {
                 foreach (Plant p in plants)
                 {
-                    ComboBoxItem cbItem = new ComboBoxItem();
-                    cbItem.Tag = p;
-                    cbItem.Content = p.PlantName;
-                    cbAddPlantsToGarden.Items.Add(cbItem);
+                    List<String> addedPlants = new();
+                    if (!addedPlants.Contains(p.PlantName))
+                    {
+                        // om namnet på plantan inte blivit tillagt, lägg till den. 
+                        addedPlants.Add(p.PlantName);
+                        // Gör ett nytt comboboxitem för plantan
+                        ComboBoxItem cbPlant = new ComboBoxItem();
+                        cbPlant.Tag = p;
+                        cbPlant.Content = p.PlantName;
+                        // Lägg till plantan till listview. 
+                        lstplants.Items.Add(cbPlant);
+                    }
                 }
 
             }
@@ -43,7 +51,9 @@ namespace GreenThumbProject.Windows
         {
             Garden? potentialGarden = await _unitOfWork.GardenRepository.GetGardenByUserIdAsync(_user.UserId);
             if (potentialGarden != null)
-            { // Om det finns en garden med detta userId, hämta alla plantgardens som har detta gardenId.  
+            {
+                lblgardenName.Content = $"Welcome to your digital garden: {potentialGarden.Name}";
+                // Om det finns en garden med detta userId, hämta alla plantgardens som har detta gardenId.  
                 var plantgardens = await _unitOfWork.PlantGardenRepository.GetPlantGardenbyGardenIdAsync(potentialGarden.GardenId);
                 if (plantgardens != null)
                 {
@@ -141,6 +151,32 @@ namespace GreenThumbProject.Windows
                     GardenPlantDetailsWindow gpd = new GardenPlantDetailsWindow(plant, _user);
                     gpd.Show();
                     Close();
+
+                }
+            }
+            else if (item == null)
+            {
+                MessageBox.Show("Please select a plant in the list");
+            }
+        }
+
+        private async void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            // Hämta listviewitem 
+            ComboBoxItem item = (ComboBoxItem)lstplants.SelectedItem;
+            if (item != null)
+            {
+                // Casta till plantgarden 
+                PlantGarden pg = (PlantGarden)item.Tag;
+                if (pg != null)
+                {
+                    // Hämta plant 
+                    Plant plantToRemove = pg.Plant;
+                    await _unitOfWork.PlantRepository.DeleteAsync(plantToRemove.PlantId);
+                    await _unitOfWork.Complete();
+                    MessageBox.Show("Selected plant was removed.");
+                    lstplants.Items.Clear();
+                    await FillGardenData();
 
                 }
             }

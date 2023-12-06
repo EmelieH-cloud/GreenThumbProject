@@ -25,7 +25,13 @@ namespace GreenThumbProject.Windows
             txtPlantName.Text = "";
             txtDetailsofPlant.Text = "";
             txtInstructionforPlant.Text = "";
+            counter = 0;
             lblInstructionsAdded.Content = counter.ToString();
+        }
+
+        private void FeedBackMessage()
+        {
+            MessageBox.Show("Plant successfully added to the database");
         }
 
         private async void FinishButton_Click(object sender, RoutedEventArgs e)
@@ -40,7 +46,8 @@ namespace GreenThumbProject.Windows
                 if (nameIsTaken)
                 {
                     MessageBox.Show("A plant with this name already exists in the database, please try again.");
-                    txtPlantName.Text = "";
+
+                    ClearAllFields();
                     return;
                 }
                 //==========================================================================
@@ -50,6 +57,7 @@ namespace GreenThumbProject.Windows
                     plant.PlantName = plantname;
                     await _unitOfWork.PlantRepository.AddAsync(plant);
                     await _unitOfWork.Complete(); // spara till databasen 
+                    FeedBackMessage();
                     ClearAllFields();
                 }
                 else if (!nameIsTaken && plantdetails != null && instructions.Count == 0) // namnet är ledigt, detaljer ska läggas till men inga instruktioner. 
@@ -59,6 +67,7 @@ namespace GreenThumbProject.Windows
                     plant.PlantName = plantname;
                     await _unitOfWork.PlantRepository.AddAsync(plant);
                     await _unitOfWork.Complete(); // spara till databasen 
+                    FeedBackMessage();
                     ClearAllFields();
                 }
                 else if (!nameIsTaken && plantdetails == null && instructions.Count > 0)  // namnet är ledigt, inga detaljer ska läggas till men instruktioner. 
@@ -76,6 +85,7 @@ namespace GreenThumbProject.Windows
                     }
                     await _unitOfWork.Complete(); // spara till databasen 
                     instructions.Clear();
+                    FeedBackMessage();
                     ClearAllFields();
                     counter = 0;
 
@@ -92,7 +102,8 @@ namespace GreenThumbProject.Windows
                     {
                         plant.Instructions.Add(instruction);
                     }
-                    await _unitOfWork.Complete(); // spara till databasen 
+                    await _unitOfWork.Complete(); // spara till databasen
+                    FeedBackMessage();
                     instructions.Clear();
                     ClearAllFields();
                     counter = 0;
@@ -113,6 +124,7 @@ namespace GreenThumbProject.Windows
                 Instruction newinstruction = new();
                 newinstruction.Content = instructionContent;
                 instructions.Add(newinstruction);
+                txtInstructionforPlant.Text = "";
                 counter++;
                 lblInstructionsAdded.Content = counter.ToString();
             }

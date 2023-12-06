@@ -24,7 +24,6 @@ namespace GreenThumbProject.Data
 #nullable restore
 
 
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);

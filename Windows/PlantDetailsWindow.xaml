@@ -11,7 +11,7 @@
     </Window.Resources>
     <Border CornerRadius="35" BorderThickness="24">
         <Border.BorderBrush>
-            <SolidColorBrush Color="green"/>
+            <SolidColorBrush Color="#204F31"/>
         </Border.BorderBrush>
         <Grid x:Name="detailsgrid">
             <Grid.Background>
@@ -39,7 +39,7 @@
             </DataGrid>
             <TextBlock  Margin="10" TextWrapping="Wrap" Height="100" x:Name="txtPlantDetails" Grid.Column="1" Background="white" Grid.RowSpan="2" Grid.Row="3" Grid.ColumnSpan="3"/>
             <Button x:Name="btnReturn"  Grid.Column="4" Grid.Row="0" Width="70" Height="40" Content="Return" Click="btnReturn_Click" VerticalAlignment="Top" HorizontalAlignment="Right"/>
-
+            <Label x:Name="lblplantName" Content="Plant details: " Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Foreground="#FFF6EAEA"/>
         </Grid>
     </Border>
 </Window>
