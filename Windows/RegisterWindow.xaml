@@ -34,15 +34,16 @@
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                 <GradientStop Color="LightGreen" Offset="0.8"/>
-                <GradientStop Color="#219F21" Offset="0.3"/>
+                <GradientStop Color="#1C956B" Offset="0.3"/>
                 <GradientStop Color="#5E876C" Offset="0.2"/>
             </LinearGradientBrush>
         </Border.BorderBrush>
         <Grid x:Name="LogInGrid">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#219F21" Offset="0.6"/>
-                    <GradientStop Color="#5E876C" Offset="0.2"/>
+       
+                    <GradientStop Color="#5E876C" Offset="0.8"/>
+                    <GradientStop Color="#196B4E" Offset="0.2"/>
                 </LinearGradientBrush>
             </Grid.Background>
             <Grid.ColumnDefinitions>

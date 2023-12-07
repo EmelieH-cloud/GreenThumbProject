@@ -62,7 +62,7 @@ namespace GreenThumbProject.Windows
                             Plant? plantToDisplay = _unitOfWork.PlantRepository.GetById(plantgarden.PlantId);
                             if (plantToDisplay != null)
                             {
-                                listViewItem.Content = $"{plantToDisplay.PlantName}";
+                                listViewItem.Content = $"PlantId: {plantToDisplay.PlantId}, {plantToDisplay.PlantName}";
                                 lstplants.Items.Add(listViewItem);
                             }
                         }
@@ -94,17 +94,13 @@ namespace GreenThumbProject.Windows
                             Plant newGardenPlant = new Plant();
                             newGardenPlant.PlantName = chosenPlant.PlantName;
                             newGardenPlant.Details = chosenPlant.Details;
-                            newGardenPlant.Instructions = new List<Instruction>(chosenPlant.Instructions);
-
                             PlantGarden newPg = new PlantGarden();
                             newPg.Garden = potentialGarden;
                             newPg.Plant = newGardenPlant;
                             newPg.PlantId = newGardenPlant.PlantId;
                             newPg.GardenId = potentialGarden.GardenId;
-
                             _unitOfWork.PlantGardenRepository.Add(newPg);
                             _unitOfWork.Complete();
-
                             lstplants.Items.Clear();
                             FillGardenData();
                         }
@@ -157,13 +153,23 @@ namespace GreenThumbProject.Windows
                 if (pg != null)
                 {
                     Plant plantToView = (Plant)pg.Plant;
-                    MessageBox.Show(plantToView.Details);
+                    if (plantToView != null)
+                    {
+                        MessageBox.Show(plantToView.Details);
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Please choose a plant in the list");
                 }
             }
-            else
-            {
-                MessageBox.Show("Please choose a plant in the list");
-            }
+        }
+
+        private void btnInstructiondatabase_Click(object sender, RoutedEventArgs e)
+        {
+            PlantInstructionsCatalog plantInstructionsCatalog = new PlantInstructionsCatalog();
+            plantInstructionsCatalog.Show();
         }
     }
 }

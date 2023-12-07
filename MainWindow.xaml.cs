@@ -41,6 +41,11 @@ namespace GreenThumbProject
                     mygarden.Show();
                     Close();
                 }
+
+                else
+                {
+                    MessageBox.Show("No user found");
+                }
             }
         }
 

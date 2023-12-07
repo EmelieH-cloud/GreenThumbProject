@@ -26,7 +26,7 @@
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="Margin" Value="0 8"/>
             <Setter Property="Foreground" Value="MintCream"/>
-            <Setter Property="Background" Value="#167747"/>
+            <Setter Property="Background" Value="#195638"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -53,8 +53,8 @@
         <Grid x:Name="LogInGrid">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#53BA77" Offset="0.36"/>
-                    <GradientStop Color="#03431A" Offset="0.36"/>
+                    <GradientStop Color="#53BA77" Offset="0.86"/>
+                    <GradientStop Color="#03431A" Offset="0.86"/>
                     <GradientStop Color="#1F5A34" Offset="0.5"/>
                 </LinearGradientBrush>
             </Grid.Background>
@@ -73,17 +73,19 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button Grid.Column="4" Grid.Row="4" Height="50" Width="80"  Content="Go" Style="{StaticResource Buttons}" Click="Button_Click"/>
+            <Button Grid.Column="3" Grid.Row="3" Grid.RowSpan="2" Height="49" Width="80"  Content="Go" Style="{StaticResource Buttons}" Click="Button_Click" VerticalAlignment="Center" Margin="0,0,0,15" HorizontalAlignment="Center"/>
             <Label Name="lblgardenName" Content="Welcome to your digital garden" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" FontSize="20" Foreground="#FFF6EFEF" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,0,0" FontStyle="Italic" />
             <Label x:Name="lblgardenAndUser" Content="Hello, username" Margin="5" Grid.Row="0" Grid.ColumnSpan="4" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Foreground="#FFF9F5F5" VerticalAlignment="Center"/>
-            <ListView x:Name="lstplants" Width="190" Height="240" Grid.Row="2" Margin="5" Grid.RowSpan="3" Grid.ColumnSpan="2" Grid.Column="0"/>
-            <Label Content="Add plants to your garden:" Grid.Column="2" Grid.RowSpan="1" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Top" FontSize="20" VerticalContentAlignment="Center" Foreground="#FFFFFBFB" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <Label Content="Remove selected plant:" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" VerticalAlignment="Center" FontSize="16" VerticalContentAlignment="Center" Foreground="#FFFFFBFB" FontWeight="Bold" HorizontalAlignment="Center" Background="#FFE34848"/>
-            <Label Content="Tell me more about selected plant:" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="4" VerticalAlignment="Center" FontSize="16" VerticalContentAlignment="Center" Foreground="#FFFFFBFB" FontWeight="Bold" HorizontalAlignment="Center" Background="#FFE34848"/>
-            <Button x:Name="btnDelete" Style="{StaticResource Buttons}" Height="50" Width="90"  Grid.Column="4" Grid.Row="3" Content="Remove" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnDelete_Click"/>
-            <ComboBox x:Name="cbAddPlantsToGarden" Grid.Column="2" Grid.RowSpan="1" Margin="9" Grid.Row="2" Grid.ColumnSpan="2" Width="200" Height="35" HorizontalAlignment="Center" BorderBrush="#FF4E0909" VerticalAlignment="Bottom"/>
+            <ListView x:Name="lstplants" Width="230" Height="240" Grid.Row="2" Margin="5" Grid.RowSpan="3" Grid.ColumnSpan="2" Grid.Column="0"/>
+            <Label Content="Add plants to your garden:" Grid.Column="2" Grid.RowSpan="1" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Top" FontSize="20" VerticalContentAlignment="Center" Foreground="#FFFFFBFB" FontWeight="Bold" HorizontalAlignment="Right"/>
+            <Label Content="Remove plant:" Width="150" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" VerticalAlignment="Top" FontSize="16" VerticalContentAlignment="Center" Foreground="#FFFFFBFB" FontWeight="Bold" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,10,0,0"/>
+            <Label Content="Plant details:" Width="150" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" VerticalAlignment="Bottom" FontSize="16" VerticalContentAlignment="Center" Foreground="#FFFFFBFB" FontWeight="Bold" HorizontalAlignment="Right"  HorizontalContentAlignment="Center" Margin="0,5,0,0"/>
+            <Button x:Name="btnDelete" Style="{StaticResource Buttons}" Height="50" Width="90" Grid.ColumnSpan="3"  Grid.Column="2" Grid.Row="3" Content="Remove" VerticalAlignment="Top" HorizontalAlignment="Center" Click="btnDelete_Click"/>
+            <ComboBox x:Name="cbAddPlantsToGarden" Grid.Column="2" Grid.RowSpan="1" Margin="9" Grid.Row="2" Grid.ColumnSpan="2" Width="200" Height="35" HorizontalAlignment="Right" BorderBrush="#FF4E0909" VerticalAlignment="Bottom"/>
             <Button x:Name="btnaddplant" Style="{StaticResource Buttons}" Content="Add" Click="btnaddplant_Click" Grid.Column="4" Grid.Row="2" Height="49" Width="100" VerticalAlignment="Bottom" Margin="0,0,0,0" HorizontalAlignment="Center"/>
             <Button x:Name="btnReturn" Margin="5" Style="{StaticResource Buttons}" Height="50" Width="80" Grid.Column="5" Grid.Row="4" Content="Return" FontSize="16" Click="btnReturn_Click" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+            <Label Content="Looking for plant care guidance?" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Foreground="#FFF4EDED" FontSize="16" VerticalAlignment="Top" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
+            <Button x:Name="btnInstructiondatabase" Background="#FFD7D7B4" Content="Plant care database" Grid.Column="5" Grid.ColumnSpan="2" Height="40" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" BorderBrush="#FFB37575" Click="btnInstructiondatabase_Click"/>
         </Grid>
     </Border>
 </Window>

@@ -108,7 +108,7 @@ namespace GreenThumbProject.Windows
                 // Öppna PlantDetailsWindow
                 PlantDetailsWindow plantDetailsWindow = new PlantDetailsWindow(chosenPlant);
                 plantDetailsWindow.Show();
-                Close();
+
             }
             else
             {

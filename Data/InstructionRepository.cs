@@ -16,15 +16,17 @@ namespace GreenThumbProject.Data
             return _context.Set<T>().Find(id);
         }
 
-        public List<T> GetAll()
+        public List<Instruction> GetAll()
         {
-            return _context.Set<T>().ToList();
+            return _context.Set<T>().OfType<Instruction>().ToList();
         }
 
         public List<Instruction> GetAllPlantInstructions(int plantId)
         {
             return _context.Set<T>().OfType<Instruction>().Where(i => i.PlantId == plantId).ToList();
         }
+
+
 
         public void Add(T entity)
         {

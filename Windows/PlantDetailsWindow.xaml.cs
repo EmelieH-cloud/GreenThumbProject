@@ -62,8 +62,6 @@ namespace GreenThumbProject.Windows
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {
-            PlantWindow plantWindow = new PlantWindow();
-            plantWindow.Show();
             Close();
         }
     }

@@ -42,5 +42,12 @@ namespace GreenThumbProject.Windows
             mainWindow.Show();
             Close();
         }
+
+        private void btninstructiondatabase_Click(object sender, RoutedEventArgs e)
+        {
+            PlantInstructionsCatalog plantInstructionsCatalog = new PlantInstructionsCatalog();
+            plantInstructionsCatalog.Show();
+
+        }
     }
 }

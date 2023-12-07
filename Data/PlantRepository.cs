@@ -18,6 +18,7 @@ namespace GreenThumbProject.Data
             return plant != null;
         }
 
+
         public Plant? SearchPlant(string enteredPlant)
         {
             try
