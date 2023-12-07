@@ -31,7 +31,7 @@ namespace GreenThumbProject.Windows
             MessageBox.Show("Plant successfully added to the database");
         }
 
-        private async Task FinishButton_Click(object sender, RoutedEventArgs e)
+        private void FinishButton_Click(object sender, RoutedEventArgs e)
         {
             using (var context = new MyDBContext())
             {
@@ -42,7 +42,7 @@ namespace GreenThumbProject.Windows
 
                 if (plantname != null)
                 {
-                    bool nameIsTaken = await _unitOfWork.PlantRepository.PlantNameIsTakenAsync(plantname);
+                    bool nameIsTaken = _unitOfWork.PlantRepository.PlantNameIsTaken(plantname);
                     if (nameIsTaken)
                     {
                         MessageBox.Show("A plant with this name already exists in the database, please try again.");
@@ -55,8 +55,8 @@ namespace GreenThumbProject.Windows
                     {
                         Plant plant = new Plant();
                         plant.PlantName = plantname;
-                        await _unitOfWork.PlantRepository.AddAsync(plant);
-                        await _unitOfWork.Complete();
+                        _unitOfWork.PlantRepository.Add(plant);
+                        _unitOfWork.Complete();
                         FeedBackMessage();
                         ClearAllFields();
                     }
@@ -65,8 +65,8 @@ namespace GreenThumbProject.Windows
                         Plant plant = new Plant();
                         plant.Details = plantdetails;
                         plant.PlantName = plantname;
-                        await _unitOfWork.PlantRepository.AddAsync(plant);
-                        await _unitOfWork.Complete();
+                        _unitOfWork.PlantRepository.Add(plant);
+                        _unitOfWork.Complete();
                         FeedBackMessage();
                         ClearAllFields();
                     }
@@ -74,14 +74,14 @@ namespace GreenThumbProject.Windows
                     {
                         Plant plant = new Plant();
                         plant.PlantName = plantname;
-                        await _unitOfWork.PlantRepository.AddAsync(plant);
+                        _unitOfWork.PlantRepository.Add(plant);
                         ClearAllFields();
 
                         foreach (Instruction instruction in instructions)
                         {
                             plant.Instructions.Add(instruction);
                         }
-                        await _unitOfWork.Complete();
+                        _unitOfWork.Complete();
                         instructions.Clear();
                         FeedBackMessage();
                         ClearAllFields();
@@ -92,13 +92,13 @@ namespace GreenThumbProject.Windows
                         Plant plant = new Plant();
                         plant.PlantName = plantname;
                         plant.Details = plantdetails;
-                        await _unitOfWork.PlantRepository.AddAsync(plant);
+                        _unitOfWork.PlantRepository.Add(plant);
 
                         foreach (Instruction instruction in instructions)
                         {
                             plant.Instructions.Add(instruction);
                         }
-                        await _unitOfWork.Complete();
+                        _unitOfWork.Complete();
                         FeedBackMessage();
                         instructions.Clear();
                         ClearAllFields();

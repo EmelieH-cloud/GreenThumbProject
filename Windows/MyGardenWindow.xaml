@@ -83,7 +83,7 @@
             <ComboBox x:Name="cbAddPlantsToGarden" Grid.Column="2" Margin="5" Grid.Row="2" Grid.ColumnSpan="2" Width="140" Height="40" HorizontalAlignment="Left" BorderBrush="#FF4E0909" VerticalAlignment="Top"/>
             <Button x:Name="btnaddplant" Style="{StaticResource Buttons}" Content="Add" Click="btnaddplant_Click" Grid.Column="3" Grid.Row="2" Height="50" Width="80" VerticalAlignment="Top" Margin="0,0,0,0"/>
             <Button x:Name="btnReturn" Style="{StaticResource Buttons}" Height="50" Width="80" Grid.Column="5" Grid.Row="4" Content="Return" FontSize="16" Click="btnReturn_Click" VerticalAlignment="Bottom"/>
-            <Button x:Name="btnDetails" Height="60" Content="View plant details" Style="{StaticResource Buttons}" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="btnDetails_Click"/>
+          
         </Grid>
     </Border>
 </Window>

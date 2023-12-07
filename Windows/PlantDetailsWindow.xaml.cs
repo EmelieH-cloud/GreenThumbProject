@@ -26,12 +26,12 @@ namespace GreenThumbProject.Windows
             lblplantName.Content = "Plant details: " + plant.PlantName;
         }
 
-        private async Task Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            await FillWithData();
+            FillWithData();
         }
 
-        private async Task FillWithData()
+        private void FillWithData()
         {
             using (var context = new MyDBContext())
             {
@@ -49,7 +49,7 @@ namespace GreenThumbProject.Windows
 
                 // Instructions
                 int plantId = _chosenPlant.PlantId;
-                List<Instruction> plantInstructions = await _unitOfWork.InstructionRepository.GetAllPlantInstructionsAsync(plantId);
+                List<Instruction> plantInstructions = _unitOfWork.InstructionRepository.GetAllPlantInstructions(plantId);
                 if (plantInstructions != null)
                 {
                     foreach (var instruction in plantInstructions)

@@ -18,7 +18,7 @@ namespace GreenThumbProject.Windows
             _validator = new CredentialsValidator();
         }
 
-        private async Task btnregister_Click(object sender, RoutedEventArgs e)
+        private void btnregister_Click(object sender, RoutedEventArgs e)
         {
             using (var context = new MyDBContext())
             {
@@ -33,20 +33,20 @@ namespace GreenThumbProject.Windows
 
                 if (usernameIsMinimumFiveChars && passwordIsMinimumFiveChars && usernameContainsAtLeastOneNbr && passwordContainsAtLeastOneNbr)
                 {
-                    bool nameIsAvailable = await _unitOfWork.UserRepository.UserNameIsAvailableAsync(username);
+                    bool nameIsAvailable = _unitOfWork.UserRepository.UserNameIsAvailable(username);
                     if (nameIsAvailable)
                     {
                         User newUser = new User();
                         newUser.UserName = username;
                         newUser.Password = password;
-                        await _unitOfWork.UserRepository.AddAsync(newUser);
-                        await _unitOfWork.Complete();
+                        _unitOfWork.UserRepository.Add(newUser);
+                        _unitOfWork.Complete();
 
                         Garden newGarden = new Garden();
                         newGarden.Name = username + "'s" + " garden";
                         newGarden.UserId = newUser.UserId;
-                        await _unitOfWork.GardenRepository.AddAsync(newGarden);
-                        await _unitOfWork.Complete();
+                        _unitOfWork.GardenRepository.Add(newGarden);
+                        _unitOfWork.Complete();
 
                         MessageBox.Show("New user: " + newUser.UserName + " registered with new garden: " + newGarden.Name);
                         txtPassword.Text = "";

@@ -1,5 +1,4 @@
 ﻿using GreenThumbProject.Models;
-using Microsoft.EntityFrameworkCore;
 using System.Windows;
 
 namespace GreenThumbProject.Data
@@ -13,12 +12,12 @@ namespace GreenThumbProject.Data
             _context = context;
         }
 
-        public async Task<User?> AuthenticateCredentialsAsync(string enteredUsername, string enteredPassword)
+        public User? AuthenticateCredentials(string enteredUsername, string enteredPassword)
         {
             try
             {
-                var user = await _context.Users
-                    .SingleOrDefaultAsync(u => u.UserName == enteredUsername && u.Password == enteredPassword);
+                var user = _context.Users
+                    .SingleOrDefault(u => u.UserName == enteredUsername && u.Password == enteredPassword);
 
                 return user;
             }
@@ -29,38 +28,38 @@ namespace GreenThumbProject.Data
             }
         }
 
-        public async Task<T?> GetByIdAsync(int id)
+        public T? GetById(int id)
         {
-            return await _context.Set<T>().FindAsync(id);
+            return _context.Set<T>().Find(id);
         }
 
-        public async Task<bool> UserNameIsAvailableAsync(string requestedUsername)
+        public bool UserNameIsAvailable(string requestedUsername)
         {
-            var user = await _context.Users
-                .SingleOrDefaultAsync(u => u.UserName == requestedUsername);
+            var user = _context.Users
+                .SingleOrDefault(u => u.UserName == requestedUsername);
 
             return user == null;
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public List<T> GetAll()
         {
-            return await _context.Set<T>().ToListAsync();
+            return _context.Set<T>().ToList();
         }
 
-        public async Task AddAsync(T entity)
+        public void Add(T entity)
         {
             _context.Set<T>().Add(entity);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
-        public async Task DeleteAsync(int id)
+        public void Delete(int id)
         {
-            var entityToDelete = await _context.Set<T>().FindAsync(id);
+            var entityToDelete = _context.Set<T>().Find(id);
 
             if (entityToDelete != null)
             {
                 _context.Set<T>().Remove(entityToDelete);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
         }
     }

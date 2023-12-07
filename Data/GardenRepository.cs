@@ -1,5 +1,4 @@
 ﻿using GreenThumbProject.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace GreenThumbProject.Data
 {
@@ -12,37 +11,37 @@ namespace GreenThumbProject.Data
             _context = context;
         }
 
-        public async Task<Garden?> GetGardenByUserIdAsync(int enteredUserId)
+        public Garden? GetGardenByUserId(int enteredUserId)
         {
-            return await _context.Set<T>()
+            return _context.Set<T>()
                 .OfType<Garden>()
-                .FirstOrDefaultAsync(g => g.UserId == enteredUserId);
+                .FirstOrDefault(g => g.UserId == enteredUserId);
         }
 
-        public async Task<T?> GetByIdAsync(int id)
+        public T? GetById(int id)
         {
-            return await _context.Set<T>().FindAsync(id);
+            return _context.Set<T>().Find(id);
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public List<T> GetAll()
         {
-            return await _context.Set<T>().ToListAsync();
+            return _context.Set<T>().ToList();
         }
 
-        public async Task AddAsync(T entity)
+        public void Add(T entity)
         {
             _context.Set<T>().Add(entity);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
-        public async Task DeleteAsync(int id)
+        public void Delete(int id)
         {
-            var entityToDelete = await _context.Set<T>().FindAsync(id);
+            var entityToDelete = _context.Set<T>().Find(id);
 
             if (entityToDelete != null)
             {
                 _context.Set<T>().Remove(entityToDelete);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
         }
     }

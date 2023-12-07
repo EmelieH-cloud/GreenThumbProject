@@ -19,12 +19,12 @@ namespace GreenThumbProject.Windows
             _user = loggedinUser;
         }
 
-        public async Task FillPlantData()
+        public void FillPlantData()
         {
             using (var context = new MyDBContext())
             {
                 GreenThumbUOW _unitOfWork = new(context);
-                var plants = await _unitOfWork.PlantRepository.GetAllAsync();
+                var plants = _unitOfWork.PlantRepository.GetAll();
                 if (plants != null)
                 {
                     List<String> addedPlants = new();
@@ -39,28 +39,27 @@ namespace GreenThumbProject.Windows
                             cbAddPlantsToGarden.Items.Add(cbPlant);
                         }
                     }
-
                 }
             }
         }
 
-        public async Task FillGardenData()
+        public void FillGardenData()
         {
             using (var context = new MyDBContext())
             {
                 GreenThumbUOW _unitOfWork = new(context);
-                Garden? potentialGarden = await _unitOfWork.GardenRepository.GetGardenByUserIdAsync(_user.UserId);
+                Garden? potentialGarden = _unitOfWork.GardenRepository.GetGardenByUserId(_user.UserId);
                 if (potentialGarden != null)
                 {
                     lblgardenName.Content = $"Welcome to your digital garden: {potentialGarden.Name}";
-                    var plantgardens = await _unitOfWork.PlantGardenRepository.GetPlantGardenbyGardenIdAsync(potentialGarden.GardenId);
+                    var plantgardens = _unitOfWork.PlantGardenRepository.GetPlantGardenbyGardenId(potentialGarden.GardenId);
                     if (plantgardens != null)
                     {
                         foreach (var plantgarden in plantgardens)
                         {
                             ListViewItem listViewItem = new ListViewItem();
                             listViewItem.Tag = plantgarden;
-                            Plant? plantToDisplay = await _unitOfWork.PlantRepository.GetByIdAsync(plantgarden.PlantId);
+                            Plant? plantToDisplay = _unitOfWork.PlantRepository.GetById(plantgarden.PlantId);
                             if (plantToDisplay != null)
                             {
                                 listViewItem.Content = $"{plantToDisplay.PlantName}";
@@ -72,18 +71,18 @@ namespace GreenThumbProject.Windows
             }
         }
 
-        private async Task Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            await FillGardenData();
-            await FillPlantData();
+            FillGardenData();
+            FillPlantData();
         }
 
-        private async Task btnaddplant_Click(object sender, RoutedEventArgs e)
+        private void btnaddplant_Click(object sender, RoutedEventArgs e)
         {
             using (var context = new MyDBContext())
             {
                 GreenThumbUOW _unitOfWork = new(context);
-                Garden? potentialGarden = await _unitOfWork.GardenRepository.GetGardenByUserIdAsync(_user.UserId);
+                Garden? potentialGarden = _unitOfWork.GardenRepository.GetGardenByUserId(_user.UserId);
                 if (potentialGarden != null)
                 {
                     ComboBoxItem chosenItem = (ComboBoxItem)cbAddPlantsToGarden.SelectedItem;
@@ -103,11 +102,11 @@ namespace GreenThumbProject.Windows
                             newPg.PlantId = newGardenPlant.PlantId;
                             newPg.GardenId = potentialGarden.GardenId;
 
-                            await _unitOfWork.PlantGardenRepository.AddAsync(newPg);
-                            await _unitOfWork.Complete();
+                            _unitOfWork.PlantGardenRepository.Add(newPg);
+                            _unitOfWork.Complete();
 
                             lstplants.Items.Clear();
-                            await FillGardenData();
+                            FillGardenData();
                         }
                     }
                 }
@@ -125,27 +124,8 @@ namespace GreenThumbProject.Windows
             Close();
         }
 
-        private void btnDetails_Click(object sender, RoutedEventArgs e)
-        {
-            ListViewItem item = (ListViewItem)lstplants.SelectedItem;
-            if (item != null)
-            {
-                PlantGarden pg = (PlantGarden)item.Tag;
-                if (pg != null)
-                {
-                    Plant plant = pg.Plant;
-                    GardenPlantDetailsWindow gpd = new GardenPlantDetailsWindow(plant, _user);
-                    gpd.Show();
-                    Close();
-                }
-            }
-            else if (item == null)
-            {
-                MessageBox.Show("Please select a plant in the list");
-            }
-        }
 
-        private async Task btnDelete_Click(object sender, RoutedEventArgs e)
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             using (var context = new MyDBContext())
             {
@@ -157,14 +137,15 @@ namespace GreenThumbProject.Windows
                     if (pg != null)
                     {
                         Plant plantToRemove = (Plant)pg.Plant;
-                        await _unitOfWork.PlantRepository.DeleteAsync(plantToRemove.PlantId);
-                        await _unitOfWork.Complete();
+                        _unitOfWork.PlantRepository.Delete(plantToRemove.PlantId);
+                        _unitOfWork.Complete();
                         MessageBox.Show("Selected plant was removed.");
                         lstplants.Items.Clear();
-                        await FillGardenData();
+                        FillGardenData();
                     }
                 }
             }
         }
     }
 }
+

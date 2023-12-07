@@ -1,5 +1,4 @@
 ﻿using GreenThumbProject.Models;
-using Microsoft.EntityFrameworkCore;
 using System.Windows;
 
 namespace GreenThumbProject.Data
@@ -13,19 +12,17 @@ namespace GreenThumbProject.Data
             _context = context;
         }
 
-        public async Task<Boolean> PlantNameIsTakenAsync(string enteredPlant)
+        public bool PlantNameIsTaken(string enteredPlant)
         {
-            var plant = await _context.Set<T>().OfType<Plant>().SingleOrDefaultAsync(p => p.PlantName.ToLower() == enteredPlant.ToLower());
-
+            var plant = _context.Set<T>().OfType<Plant>().SingleOrDefault(p => p.PlantName.ToLower() == enteredPlant.ToLower());
             return plant != null;
         }
 
-        public async Task<Plant?> SearchPlantAsync(string enteredPlant)
+        public Plant? SearchPlant(string enteredPlant)
         {
             try
             {
-                var plant = await _context.Set<T>().OfType<Plant>().FirstOrDefaultAsync(p => p.PlantName.ToLower() == enteredPlant.ToLower());
-
+                var plant = _context.Set<T>().OfType<Plant>().FirstOrDefault(p => p.PlantName.ToLower() == enteredPlant.ToLower());
                 return plant;
             }
             catch (Exception ex)
@@ -35,30 +32,30 @@ namespace GreenThumbProject.Data
             }
         }
 
-        public async Task<Plant?> GetByIdAsync(int id)
+        public Plant? GetById(int id)
         {
-            return await _context.Set<T>().OfType<Plant>().FirstOrDefaultAsync(plant => plant.PlantId == id);
+            return _context.Set<T>().OfType<Plant>().FirstOrDefault(plant => plant.PlantId == id);
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public List<T> GetAll()
         {
-            return await _context.Set<T>().ToListAsync();
+            return _context.Set<T>().ToList();
         }
 
-        public async Task AddAsync(T entity)
+        public void Add(T entity)
         {
             _context.Set<T>().Add(entity);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
-        public async Task DeleteAsync(int id)
+        public void Delete(int id)
         {
-            var entityToDelete = await _context.Set<T>().FindAsync(id);
+            var entityToDelete = _context.Set<T>().Find(id);
 
             if (entityToDelete != null)
             {
                 _context.Set<T>().Remove(entityToDelete);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
         }
     }

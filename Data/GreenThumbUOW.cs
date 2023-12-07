@@ -22,9 +22,9 @@ namespace GreenThumbProject.Data
             PlantGardenRepository = new(context);
         }
 
-        public async Task Complete()
+        public void Complete()
         {
-            await _DBcontext.SaveChangesAsync();
+            _DBcontext.SaveChanges();
         }
     }
 }

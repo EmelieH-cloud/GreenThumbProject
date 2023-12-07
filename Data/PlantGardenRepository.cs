@@ -1,5 +1,4 @@
 ﻿using GreenThumbProject.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace GreenThumbProject.Data
 {
@@ -12,15 +11,15 @@ namespace GreenThumbProject.Data
             _context = context;
         }
 
-        public async Task<List<PlantGarden>> GetPlantGardenbyGardenIdAsync(int gardenId)
+        public List<PlantGarden> GetPlantGardenbyGardenId(int gardenId)
         {
-            return await _context.Set<T>().OfType<PlantGarden>().Where(pgarden => pgarden.GardenId == gardenId).ToListAsync();
+            return _context.Set<T>().OfType<PlantGarden>().Where(pgarden => pgarden.GardenId == gardenId).ToList();
         }
 
-        public async Task AddAsync(T entity)
+        public void Add(T entity)
         {
             _context.Set<T>().Add(entity);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
     }
 }

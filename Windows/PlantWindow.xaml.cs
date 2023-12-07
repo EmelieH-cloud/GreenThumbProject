@@ -21,7 +21,7 @@ namespace GreenThumbProject.Windows
             DatagridPlants.ItemsSource = Plants;
         }
 
-        private async Task LoadPlantsAsync()
+        private void LoadPlants()
         {
             try
             {
@@ -30,7 +30,7 @@ namespace GreenThumbProject.Windows
                     GreenThumbUOW _unitOfWork = new GreenThumbUOW(context);
 
                     // Hämta alla plants från databasen. 
-                    List<Plant> plants = await _unitOfWork.PlantRepository.GetAllAsync();
+                    List<Plant> plants = _unitOfWork.PlantRepository.GetAll();
 
                     // Töm observablelist. 
                     Plants.Clear();
@@ -52,13 +52,13 @@ namespace GreenThumbProject.Windows
             }
         }
 
-        private async Task Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Metod som kallas när fönstret laddas. 
-            await LoadPlantsAsync();
+            LoadPlants();
         }
 
-        private async Task btnSearchPlant_Click(object sender, RoutedEventArgs e)
+        private void btnSearchPlant_Click(object sender, RoutedEventArgs e)
         {
             string searchString = txtSearchTerm.Text;
 
@@ -73,7 +73,7 @@ namespace GreenThumbProject.Windows
             {
                 GreenThumbUOW _unitOfWork = new GreenThumbUOW(context);
 
-                Plant? identifiedPlant = await _unitOfWork.PlantRepository.SearchPlantAsync(searchString);
+                Plant? identifiedPlant = _unitOfWork.PlantRepository.SearchPlant(searchString);
                 if (identifiedPlant != null)
                 {
                     Plants.Clear(); // datagrid hämtar data från observableCollection: Plants 
@@ -88,9 +88,9 @@ namespace GreenThumbProject.Windows
             }
         }
 
-        private async Task btnClearFilter_Click(object sender, RoutedEventArgs e)
+        private void btnClearFilter_Click(object sender, RoutedEventArgs e)
         {
-            await LoadPlantsAsync();
+            LoadPlants();
         }
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
@@ -116,7 +116,7 @@ namespace GreenThumbProject.Windows
             }
         }
 
-        private async Task btnDeletePlant_Click(object sender, RoutedEventArgs e)
+        private void btnDeletePlant_Click(object sender, RoutedEventArgs e)
         {
             // Om valt item är en Plant 
             if (DatagridPlants.SelectedItem is Plant chosenPlant)
@@ -129,9 +129,9 @@ namespace GreenThumbProject.Windows
                     {
                         GreenThumbUOW _unitOfWork = new GreenThumbUOW(context);
 
-                        await _unitOfWork.PlantRepository.DeleteAsync(plantid);
-                        await _unitOfWork.Complete(); // Spara ändringarna 
-                        await LoadPlantsAsync();
+                        _unitOfWork.PlantRepository.Delete(plantid);
+                        _unitOfWork.Complete(); // Spara ändringarna 
+                        LoadPlants();
                     }
                 }
             }

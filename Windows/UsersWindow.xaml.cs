@@ -16,13 +16,13 @@ namespace GreenThumbProject.Windows
 
         }
 
-        public async Task LoadUserData()
+        public void LoadUserData()
         {
             using (var context = new MyDBContext())
             {
                 GreenThumbUOW _unitOfWork = new GreenThumbUOW(context);
 
-                var users = await _unitOfWork.UserRepository.GetAllAsync();
+                var users = _unitOfWork.UserRepository.GetAll();
                 foreach (var user in users)
                 {
                     ListViewItem item = new ListViewItem();
@@ -40,9 +40,9 @@ namespace GreenThumbProject.Windows
             Close();
         }
 
-        private async Task Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            await LoadUserData();
+            LoadUserData();
         }
     }
 }
