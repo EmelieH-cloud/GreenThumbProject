@@ -1,7 +1,7 @@
 ﻿using GreenThumbProject.Data;
 using GreenThumbProject.Models;
-using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace GreenThumbProject.Windows
 {
@@ -10,13 +10,13 @@ namespace GreenThumbProject.Windows
     /// </summary>
     public partial class PlantInstructionsCatalog : Window
     {
-        public ObservableCollection<Instruction> Instructions { get; set; }
+
+
 
         public PlantInstructionsCatalog()
         {
             InitializeComponent();
-            Instructions = new ObservableCollection<Instruction>();
-            lstinstructions.ItemsSource = Instructions;
+
 
         }
 
@@ -27,15 +27,27 @@ namespace GreenThumbProject.Windows
 
                 GreenThumbUOW _unitOfWork = new GreenThumbUOW(context);
                 var instructionRegistry = _unitOfWork.InstructionRepository.GetAll();
-                List<int> plantsId = new List<int>();
+                string listcontent = "";
+                List<string> addedStrings = new();
+
                 foreach (var instruction in instructionRegistry)
                 {
                     int id = instruction.PlantId;
-                    if (!plantsId.Contains(id))
+                    Plant? p = _unitOfWork.PlantRepository.GetById(id);
+
+                    if (p != null)
                     {
-                        Instructions.Add(instruction);
+                        ListViewItem listViewItem = new ListViewItem();
+                        listcontent = $"{p.PlantName},   {instruction.Content}";
+                        listViewItem.Content = listcontent;
+                        // Gå bara vidare om denna sträng inte redan finns. 
+                        if (!addedStrings.Contains(listcontent))
+                        {
+                            addedStrings.Add(listcontent);
+                            lstinstructions.Items.Add(listViewItem);
+                        }
+
                     }
-                    plantsId.Add(id);
                 }
 
             }

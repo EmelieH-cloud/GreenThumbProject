@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="PlantInstructionsCatalog" WindowStartupLocation="CenterScreen" WindowStyle="None"  AllowsTransparency="True" Background="Transparent" Loaded="Window_Loaded" Height="350" Width="700">
   
-    <Border CornerRadius="35" BorderThickness="24">
+    <Border CornerRadius="35" BorderThickness="17">
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="black" Offset="0.6"/>
-                <GradientStop Color="DarkGray" Offset="0.3"/>
-                <GradientStop Color="Gray" Offset="0.2"/>
+                <GradientStop Color="#0E2F25" Offset="0.6"/>
+        
+                <GradientStop Color="#387563" Offset="0.6"/>
             </LinearGradientBrush>
         </Border.BorderBrush>
         <Grid>
@@ -35,14 +35,8 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Button x:Name="btnClose" HorizontalContentAlignment="Center" Grid.ColumnSpan="3" Content="Close" FontSize="18" FontWeight="Bold" Click="btnClose_Click"/>
+
             <ListView x:Name="lstinstructions" Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1" Grid.RowSpan="10">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Width="60" Header="PlantId" DisplayMemberBinding="{Binding PlantId}" />
-                        <GridViewColumn Width="100" Header="InstructionId" DisplayMemberBinding="{Binding InstructionId}" />
-                        <GridViewColumn  Header="Instruction" DisplayMemberBinding="{Binding Content}" />
-                    </GridView>
-                </ListView.View>
             </ListView>
         </Grid>
     </Border>

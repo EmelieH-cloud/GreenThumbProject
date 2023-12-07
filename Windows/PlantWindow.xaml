@@ -46,14 +46,14 @@
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                 <GradientStop Color="#204F31" Offset="0.8"/>
-                <GradientStop Color="green" Offset="0.2"/>
+                <GradientStop Color="#062C12" Offset="0.2"/>
             </LinearGradientBrush>
         </Border.BorderBrush>
         <Grid x:Name="LogInGrid">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#204F31" Offset="0.8"/>
-                    <GradientStop Color="green" Offset="0.2"/>
+                    <GradientStop Color="#062C12" Offset="0.2"/>
                 </LinearGradientBrush>
             </Grid.Background>
             <Grid.ColumnDefinitions>
@@ -81,9 +81,9 @@
             <Label Content="Search plant:" Grid.ColumnSpan="2" FontSize="18" FontWeight="Bold" Foreground="White"/>
             <TextBox VerticalContentAlignment="Center" HorizontalContentAlignment="Center" x:Name="txtSearchTerm" Grid.Column="0" Grid.ColumnSpan="2" Height="40" VerticalAlignment="Bottom"/>
             <Button x:Name="btnSearchPlant" Grid.Column="2" Content="Go" Height="50" Width="60" Style="{StaticResource Buttons}" Click="btnSearchPlant_Click"  FontWeight="Bold" VerticalAlignment="Bottom" BorderBrush="#FF060000"/>
-            <Button x:Name="btnDeletePlant" Grid.Column="4" Height="50" Width="90" Grid.Row="3" Style="{StaticResource Buttons}" Content="Delete plant" FontSize="11" Click="btnDeletePlant_Click" />
-            <Button x:Name="btnDetailsPlant" Grid.Column="4" Height="50" Width="90" Grid.Row="4" Style="{StaticResource Buttons}" Content="Plant details" FontSize="11" Click="btnDetailsPlant_Click" VerticalAlignment="Top"/>
-            <Button x:Name="btnAddPlantsWindow" Grid.Column="4" Height="50" Width="90" Grid.Row="2" Style="{StaticResource Buttons}" Content="Add plants" FontSize="11" Click="btnAddPlantsWindow_Click" VerticalAlignment="Bottom"  />
+            <Button x:Name="btnDeletePlant" Grid.Column="4" Grid.ColumnSpan="2" Height="50" Width="150" Grid.Row="3" Style="{StaticResource Buttons}" Content="Delete plant" FontSize="14" Click="btnDeletePlant_Click" />
+            <Button x:Name="btnDetailsPlant" Grid.Column="4" Grid.ColumnSpan="2" Height="50" Width="150" Grid.Row="4" Style="{StaticResource Buttons}" Content="Plant details" FontSize="14" Click="btnDetailsPlant_Click" VerticalAlignment="Top"/>
+            <Button x:Name="btnAddPlantsWindow" Grid.ColumnSpan="2" Grid.Column="4" Height="50" Width="150" Grid.Row="2" Style="{StaticResource Buttons}" Content="Add plants" FontSize="14" Click="btnAddPlantsWindow_Click" VerticalAlignment="Bottom"  />
             <Button x:Name="btnClearFilter"  FontSize="12" Content="Clear search" Height="50" Width="100" Style="{StaticResource Buttons}" Grid.Column="3" Click="btnClearFilter_Click" FontWeight="Bold" VerticalAlignment="Bottom"/>
             <Button x:Name="btnReturn" Style="{StaticResource Buttons}" Grid.Column="6" Height="50" Width="100"  Grid.Row="0" Content="Return" Click="btnReturn_Click" VerticalAlignment="Top"/>
         </Grid>
