@@ -1,7 +1,7 @@
 ﻿using GreenThumbProject.Data;
 using GreenThumbProject.Models;
+using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace GreenThumbProject.Windows
 {
@@ -11,46 +11,43 @@ namespace GreenThumbProject.Windows
     public partial class GardenPlantDetailsWindow : Window
     {
         private readonly Plant _chosenPlant;
-        private readonly MyDBContext _dbContext;
-        private readonly GreenThumbUOW _unitOfWork;
         private readonly User _user;
-
+        public ObservableCollection<Instruction> Instructions { get; set; }
 
         public GardenPlantDetailsWindow(Plant plant, User user)
         {
             InitializeComponent();
             _user = user;
             _chosenPlant = plant;
-            _dbContext = new MyDBContext();
-            _unitOfWork = new GreenThumbUOW(_dbContext);
-
+            Instructions = new ObservableCollection<Instruction>();
+            dataGridInstructions.ItemsSource = Instructions;
         }
 
-        private void FillWithData()
+        private async Task FillWithData()
         {
-            // Details
-
-            if (_chosenPlant.Details != null)
+            using (var context = new MyDBContext())
             {
-                txtPlantDetails.Text = _chosenPlant.Details;
-            }
+                GreenThumbUOW _unitOfWork = new GreenThumbUOW(context);
 
-            else if (_chosenPlant.Details == null)
-            {
-                txtPlantDetails.Text = "Not details have been added for this plant yet.";
-            }
-
-            // Instructions
-            int plantId = _chosenPlant.PlantId;
-            List<Instruction> plantInstructions = _chosenPlant.Instructions;
-            if (plantInstructions != null)
-            {
-                foreach (var instruction in plantInstructions)
+                // Details
+                if (_chosenPlant.Details != null)
                 {
-                    ListViewItem item = new ListViewItem();
-                    item.Tag = instruction;
-                    item.Content = instruction.Content;
-                    dataGridInstructions.Items.Add(item);
+                    txtPlantDetails.Text = _chosenPlant.Details;
+                }
+                else
+                {
+                    txtPlantDetails.Text = "No details have been added for this plant yet.";
+                }
+
+                // Instructions
+                int plantId = _chosenPlant.PlantId;
+                List<Instruction> plantInstructions = await _unitOfWork.InstructionRepository.GetAllPlantInstructionsAsync(plantId);
+                if (plantInstructions != null)
+                {
+                    foreach (var instruction in plantInstructions)
+                    {
+                        Instructions.Add(instruction); // lägg till i observableCollection 
+                    }
                 }
             }
         }
@@ -61,12 +58,11 @@ namespace GreenThumbProject.Windows
             MyGardenWindow mygarden = new MyGardenWindow(_user);
             mygarden.Show();
             Close();
-
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async Task Window_Loaded(object sender, RoutedEventArgs e)
         {
-            FillWithData();
+            await FillWithData();
         }
     }
 }

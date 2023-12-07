@@ -10,40 +10,40 @@ namespace GreenThumbProject.Windows
     /// </summary>
     public partial class PlantWindow : Window
     {
-        private readonly MyDBContext _dbContext;
-        private readonly GreenThumbUOW _unitOfWork;
+
         public ObservableCollection<Plant> Plants { get; set; }
 
         public PlantWindow()
         {
             InitializeComponent();
-            _dbContext = new MyDBContext();
-            _unitOfWork = new GreenThumbUOW(_dbContext);
             Plants = new ObservableCollection<Plant>();
             // DatagridPlants kommer hämta data från observableCollection. 
             DatagridPlants.ItemsSource = Plants;
-
         }
 
         private async Task LoadPlantsAsync()
         {
             try
             {
-                // Hämta alla plants från databasen. 
-                List<Plant> plants = await _unitOfWork.PlantRepository.GetAllAsync();
-
-                // Töm observablelist. 
-                Plants.Clear();
-
-                // Lägg till varje planta till observablelist. 
-                foreach (var plant in plants)
+                using (var context = new MyDBContext())
                 {
-                    if (!Plants.Any(plnt => plnt.PlantName == plant.PlantName))
-                    {
-                        // Lägg bara till plantan om namnet inte redan finns i listan! 
-                        Plants.Add(plant);
-                    }
+                    GreenThumbUOW _unitOfWork = new GreenThumbUOW(context);
 
+                    // Hämta alla plants från databasen. 
+                    List<Plant> plants = await _unitOfWork.PlantRepository.GetAllAsync();
+
+                    // Töm observablelist. 
+                    Plants.Clear();
+
+                    // Lägg till varje planta till observablelist. 
+                    foreach (var plant in plants)
+                    {
+                        if (!Plants.Any(plnt => plnt.PlantName == plant.PlantName))
+                        {
+                            // Lägg bara till plantan om namnet inte redan finns i listan! 
+                            Plants.Add(plant);
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -52,14 +52,13 @@ namespace GreenThumbProject.Windows
             }
         }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
-        { // Metod som kallas när fönstret laddas. 
-
+        private async Task Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Metod som kallas när fönstret laddas. 
             await LoadPlantsAsync();
-
         }
 
-        private async void btnSearchPlant_Click(object sender, RoutedEventArgs e)
+        private async Task btnSearchPlant_Click(object sender, RoutedEventArgs e)
         {
             string searchString = txtSearchTerm.Text;
 
@@ -70,21 +69,26 @@ namespace GreenThumbProject.Windows
                 return;
             }
 
-            Plant? identifiedPlant = await _unitOfWork.PlantRepository.SearchPlantAsync(searchString);
-            if (identifiedPlant != null)
+            using (var context = new MyDBContext())
             {
-                Plants.Clear(); // datagrid hämtar data från observableCollection: Plants 
-                Plants.Add(identifiedPlant);
-            }
+                GreenThumbUOW _unitOfWork = new GreenThumbUOW(context);
 
-            else if (identifiedPlant == null)
-            {
-                MessageBox.Show("Plant not found");
-                txtSearchTerm.Text = "";
+                Plant? identifiedPlant = await _unitOfWork.PlantRepository.SearchPlantAsync(searchString);
+                if (identifiedPlant != null)
+                {
+                    Plants.Clear(); // datagrid hämtar data från observableCollection: Plants 
+                    Plants.Add(identifiedPlant);
+                }
+
+                else if (identifiedPlant == null)
+                {
+                    MessageBox.Show("Plant not found");
+                    txtSearchTerm.Text = "";
+                }
             }
         }
 
-        private async void btnClearFilter_Click(object sender, RoutedEventArgs e)
+        private async Task btnClearFilter_Click(object sender, RoutedEventArgs e)
         {
             await LoadPlantsAsync();
         }
@@ -112,7 +116,7 @@ namespace GreenThumbProject.Windows
             }
         }
 
-        private async void btnDeletePlant_Click(object sender, RoutedEventArgs e)
+        private async Task btnDeletePlant_Click(object sender, RoutedEventArgs e)
         {
             // Om valt item är en Plant 
             if (DatagridPlants.SelectedItem is Plant chosenPlant)
@@ -121,11 +125,15 @@ namespace GreenThumbProject.Windows
                 if (result == MessageBoxResult.Yes)
                 {
                     int plantid = chosenPlant.PlantId;
-                    await _unitOfWork.PlantRepository.DeleteAsync(plantid);
-                    await _unitOfWork.Complete(); // Spara ändringarna 
-                    await LoadPlantsAsync();
-                }
+                    using (var context = new MyDBContext())
+                    {
+                        GreenThumbUOW _unitOfWork = new GreenThumbUOW(context);
 
+                        await _unitOfWork.PlantRepository.DeleteAsync(plantid);
+                        await _unitOfWork.Complete(); // Spara ändringarna 
+                        await LoadPlantsAsync();
+                    }
+                }
             }
             else
             {

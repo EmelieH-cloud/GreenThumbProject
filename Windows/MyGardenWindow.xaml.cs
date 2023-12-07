@@ -11,120 +11,110 @@ namespace GreenThumbProject.Windows
     public partial class MyGardenWindow : Window
     {
         private readonly User _user;
-        private readonly GreenThumbUOW _unitOfWork;
+
         public MyGardenWindow(User loggedinUser)
         {
             InitializeComponent();
-            MyDBContext context = new MyDBContext();
-            _unitOfWork = new GreenThumbUOW(context);
             lblgardenAndUser.Content = $"Hello, {loggedinUser.UserName}!";
             _user = loggedinUser;
-
         }
 
         public async Task FillPlantData()
         {
-            // Fyll comboboxen 
-            var plants = await _unitOfWork.PlantRepository.GetAllAsync();
-            if (plants != null)
+            using (var context = new MyDBContext())
             {
-                List<String> addedPlants = new();
-                foreach (Plant p in plants)
+                GreenThumbUOW _unitOfWork = new(context);
+                var plants = await _unitOfWork.PlantRepository.GetAllAsync();
+                if (plants != null)
                 {
-                    if (!addedPlants.Contains(p.PlantName))
+                    List<String> addedPlants = new();
+                    foreach (Plant p in plants)
                     {
-                        // om namnet på plantan inte blivit tillagt, lägg till den. 
-                        addedPlants.Add(p.PlantName);
-                        // Gör ett nytt comboboxitem för plantan
-                        ComboBoxItem cbPlant = new ComboBoxItem();
-                        cbPlant.Tag = p;
-                        cbPlant.Content = p.PlantName;
-                        // Lägg till plantan till listview. 
-                        cbAddPlantsToGarden.Items.Add(cbPlant);
+                        if (!addedPlants.Contains(p.PlantName))
+                        {
+                            addedPlants.Add(p.PlantName);
+                            ComboBoxItem cbPlant = new ComboBoxItem();
+                            cbPlant.Tag = p;
+                            cbPlant.Content = p.PlantName;
+                            cbAddPlantsToGarden.Items.Add(cbPlant);
+                        }
                     }
-                }
 
+                }
             }
         }
 
         public async Task FillGardenData()
         {
-            Garden? potentialGarden = await _unitOfWork.GardenRepository.GetGardenByUserIdAsync(_user.UserId);
-            if (potentialGarden != null)
+            using (var context = new MyDBContext())
             {
-                lblgardenName.Content = $"Welcome to your digital garden: {potentialGarden.Name}";
-                // Om det finns en garden med detta userId, hämta alla plantgardens som har detta gardenId.  
-                var plantgardens = await _unitOfWork.PlantGardenRepository.GetPlantGardenbyGardenIdAsync(potentialGarden.GardenId);
-                if (plantgardens != null)
+                GreenThumbUOW _unitOfWork = new(context);
+                Garden? potentialGarden = await _unitOfWork.GardenRepository.GetGardenByUserIdAsync(_user.UserId);
+                if (potentialGarden != null)
                 {
-                    foreach (var plantgarden in plantgardens)
+                    lblgardenName.Content = $"Welcome to your digital garden: {potentialGarden.Name}";
+                    var plantgardens = await _unitOfWork.PlantGardenRepository.GetPlantGardenbyGardenIdAsync(potentialGarden.GardenId);
+                    if (plantgardens != null)
                     {
-                        ListViewItem listViewItem = new ListViewItem();
-                        listViewItem.Tag = plantgarden;
-                        Plant? plantToDisplay = await _unitOfWork.PlantRepository.GetByIdAsync(plantgarden.PlantId);
-                        if (plantToDisplay != null)
+                        foreach (var plantgarden in plantgardens)
                         {
-                            listViewItem.Content = $"{plantToDisplay.PlantName}";
-                            lstplants.Items.Add(listViewItem);
+                            ListViewItem listViewItem = new ListViewItem();
+                            listViewItem.Tag = plantgarden;
+                            Plant? plantToDisplay = await _unitOfWork.PlantRepository.GetByIdAsync(plantgarden.PlantId);
+                            if (plantToDisplay != null)
+                            {
+                                listViewItem.Content = $"{plantToDisplay.PlantName}";
+                                lstplants.Items.Add(listViewItem);
+                            }
                         }
                     }
                 }
             }
         }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        private async Task Window_Loaded(object sender, RoutedEventArgs e)
         {
             await FillGardenData();
             await FillPlantData();
-
         }
 
-        private async void btnaddplant_Click(object sender, RoutedEventArgs e)
+        private async Task btnaddplant_Click(object sender, RoutedEventArgs e)
         {
-            // Säkerställ först att det finns en garden att addera en planta till. 
-            Garden? potentialGarden = await _unitOfWork.GardenRepository.GetGardenByUserIdAsync(_user.UserId);
-            if (potentialGarden != null)
+            using (var context = new MyDBContext())
             {
-                // Hämta valt comboboxitem 
-                ComboBoxItem chosenItem = (ComboBoxItem)cbAddPlantsToGarden.SelectedItem;
-                if (chosenItem != null)
+                GreenThumbUOW _unitOfWork = new(context);
+                Garden? potentialGarden = await _unitOfWork.GardenRepository.GetGardenByUserIdAsync(_user.UserId);
+                if (potentialGarden != null)
                 {
-                    // Casta comboboxitem till en plant
-                    Plant chosenPlant = (Plant)chosenItem.Tag;
-
-                    if (chosenPlant != null)
+                    ComboBoxItem chosenItem = (ComboBoxItem)cbAddPlantsToGarden.SelectedItem;
+                    if (chosenItem != null)
                     {
-                        // Skapa en ny instans av Plant med samma properties som vald planta. 
-                        Plant newGardenPlant = new Plant();
-                        newGardenPlant.PlantName = chosenPlant.PlantName;
-                        newGardenPlant.Details = chosenPlant.Details;
-                        newGardenPlant.Instructions = chosenPlant.Instructions;
+                        Plant chosenPlant = (Plant)chosenItem.Tag;
+                        if (chosenPlant != null)
+                        {
+                            Plant newGardenPlant = new Plant();
+                            newGardenPlant.PlantName = chosenPlant.PlantName;
+                            newGardenPlant.Details = chosenPlant.Details;
+                            newGardenPlant.Instructions = new List<Instruction>(chosenPlant.Instructions);
 
-                        // Skapa en ny instans av PlantGarden. 
-                        PlantGarden newPg = new PlantGarden();
-                        newPg.Garden = potentialGarden;
-                        newPg.Plant = newGardenPlant;
-                        newPg.PlantId = newGardenPlant.PlantId;
-                        newPg.GardenId = potentialGarden.GardenId;
+                            PlantGarden newPg = new PlantGarden();
+                            newPg.Garden = potentialGarden;
+                            newPg.Plant = newGardenPlant;
+                            newPg.PlantId = newGardenPlant.PlantId;
+                            newPg.GardenId = potentialGarden.GardenId;
 
-                        // Lägg till den nya PlantGarden i databasen.
-                        await _unitOfWork.PlantGardenRepository.AddAsync(newPg);
-                        await _unitOfWork.Complete();
+                            await _unitOfWork.PlantGardenRepository.AddAsync(newPg);
+                            await _unitOfWork.Complete();
 
-                        //Uppdatera UI 
-                        lstplants.Items.Clear();
-                        await FillGardenData();
-
-
+                            lstplants.Items.Clear();
+                            await FillGardenData();
+                        }
                     }
                 }
-
-
-
-            }
-            else if (potentialGarden == null)
-            {
-                MessageBox.Show("There is no garden to add this plant to!");
+                else if (potentialGarden == null)
+                {
+                    MessageBox.Show("There is no garden to add this plant to!");
+                }
             }
         }
 
@@ -137,21 +127,16 @@ namespace GreenThumbProject.Windows
 
         private void btnDetails_Click(object sender, RoutedEventArgs e)
         {
-            // Hämta listviewitem 
             ListViewItem item = (ListViewItem)lstplants.SelectedItem;
             if (item != null)
             {
-                // Casta till plantgarden 
                 PlantGarden pg = (PlantGarden)item.Tag;
                 if (pg != null)
                 {
-                    // Hämta plant 
                     Plant plant = pg.Plant;
-                    // Skicka med usern till detailswindow 
                     GardenPlantDetailsWindow gpd = new GardenPlantDetailsWindow(plant, _user);
                     gpd.Show();
                     Close();
-
                 }
             }
             else if (item == null)
@@ -160,24 +145,24 @@ namespace GreenThumbProject.Windows
             }
         }
 
-        private async void btnDelete_Click(object sender, RoutedEventArgs e)
+        private async Task btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            // Hämta comboboxitem
-            ListViewItem item = (ListViewItem)lstplants.SelectedItem;
-            if (item != null)
+            using (var context = new MyDBContext())
             {
-                // Casta till plant
-                PlantGarden pg = (PlantGarden)item.Tag;
-                if (pg != null)
+                GreenThumbUOW _unitOfWork = new(context);
+                ListViewItem item = (ListViewItem)lstplants.SelectedItem;
+                if (item != null)
                 {
-                    // Hämta plant 
-                    Plant plantToRemove = (Plant)pg.Plant;
-                    await _unitOfWork.PlantRepository.DeleteAsync(plantToRemove.PlantId);
-                    await _unitOfWork.Complete();
-                    MessageBox.Show("Selected plant was removed.");
-                    lstplants.Items.Clear();
-                    await FillGardenData();
-
+                    PlantGarden pg = (PlantGarden)item.Tag;
+                    if (pg != null)
+                    {
+                        Plant plantToRemove = (Plant)pg.Plant;
+                        await _unitOfWork.PlantRepository.DeleteAsync(plantToRemove.PlantId);
+                        await _unitOfWork.Complete();
+                        MessageBox.Show("Selected plant was removed.");
+                        lstplants.Items.Clear();
+                        await FillGardenData();
+                    }
                 }
             }
         }

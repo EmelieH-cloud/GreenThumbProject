@@ -7,85 +7,59 @@ namespace GreenThumbProject.Data
     public class PlantRepository<T> where T : class
     {
         private readonly MyDBContext _context;
-        private readonly DbSet<T> _dbSet;
 
         public PlantRepository(MyDBContext context)
         {
             _context = context;
-            _dbSet = context.Set<T>();
         }
 
-        // PlantNameIsTakenAsync
-        // Returnerar true om namnet är upptaget, false om namnet är ledigt. 
         public async Task<Boolean> PlantNameIsTakenAsync(string enteredPlant)
         {
+            var plant = await _context.Set<T>().OfType<Plant>().SingleOrDefaultAsync(p => p.PlantName.ToLower() == enteredPlant.ToLower());
 
-            var plant =
-            await _dbSet.OfType<Plant>().SingleOrDefaultAsync(p => p.PlantName.ToLower() == enteredPlant.ToLower());
-
-            if (plant != null)
-            {
-                return true;
-            }
-
-            else
-            {
-                return false;
-            }
-
+            return plant != null;
         }
 
-        // SearchPlantsAsync
-        // Metod som undersöker om det sökta namnet motsvarar en plant i databasen. 
         public async Task<Plant?> SearchPlantAsync(string enteredPlant)
         {
             try
             {
-                var plant =
-                await _dbSet.OfType<Plant>().FirstOrDefaultAsync(p => p.PlantName.ToLower() == enteredPlant.ToLower());
+                var plant = await _context.Set<T>().OfType<Plant>().FirstOrDefaultAsync(p => p.PlantName.ToLower() == enteredPlant.ToLower());
 
-                if (plant != null)
-                {
-                    return plant;
-                }
-                else
-                {
-                    return null;
-                }
+                return plant;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 return null;
             }
-
         }
 
         public async Task<Plant?> GetByIdAsync(int id)
         {
-            return await _dbSet.OfType<Plant>().FirstOrDefaultAsync(plant => plant.PlantId == id);
-
+            return await _context.Set<T>().OfType<Plant>().FirstOrDefaultAsync(plant => plant.PlantId == id);
         }
+
         public async Task<List<T>> GetAllAsync()
         {
-            return await _dbSet.ToListAsync();
+            return await _context.Set<T>().ToListAsync();
         }
-
 
         public async Task AddAsync(T entity)
         {
-            await _dbSet.AddAsync(entity);
+            _context.Set<T>().Add(entity);
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
-            var entityToDelete = await _dbSet.FindAsync(id);
+            var entityToDelete = await _context.Set<T>().FindAsync(id);
 
             if (entityToDelete != null)
             {
-                _dbSet.Remove(entityToDelete);
+                _context.Set<T>().Remove(entityToDelete);
+                await _context.SaveChangesAsync();
             }
-
         }
     }
 }

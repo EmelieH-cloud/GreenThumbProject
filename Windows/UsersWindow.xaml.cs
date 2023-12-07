@@ -9,25 +9,27 @@ namespace GreenThumbProject.Windows
     /// </summary>
     public partial class UsersWindow : Window
     {
-        private readonly MyDBContext _dbContext;
-        private readonly GreenThumbUOW _unitOfWork;
+
         public UsersWindow()
         {
             InitializeComponent();
-            _dbContext = new MyDBContext();
-            _unitOfWork = new GreenThumbUOW(_dbContext);
 
         }
 
-        public async void LoadUserData()
+        public async Task LoadUserData()
         {
-            var users = await _unitOfWork.UserRepository.GetAllAsync();
-            foreach (var user in users)
+            using (var context = new MyDBContext())
             {
-                ListViewItem item = new ListViewItem();
-                item.Tag = user;
-                item.Content = user.UserName;
-                lstUsers.Items.Add(item);
+                GreenThumbUOW _unitOfWork = new GreenThumbUOW(context);
+
+                var users = await _unitOfWork.UserRepository.GetAllAsync();
+                foreach (var user in users)
+                {
+                    ListViewItem item = new ListViewItem();
+                    item.Tag = user;
+                    item.Content = user.UserName;
+                    lstUsers.Items.Add(item);
+                }
             }
         }
 
@@ -38,9 +40,9 @@ namespace GreenThumbProject.Windows
             Close();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async Task Window_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadUserData();
+            await LoadUserData();
         }
     }
 }

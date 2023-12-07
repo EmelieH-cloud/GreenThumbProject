@@ -7,7 +7,6 @@ namespace GreenThumbProject.Data
         public GardenRepository<Garden> GardenRepository { get; }
         public PlantRepository<Plant> PlantRepository { get; }
         public UserRepository<User> UserRepository { get; }
-
         public PlantGardenRepository<PlantGarden> PlantGardenRepository { get; }
         public InstructionRepository<Instruction> InstructionRepository { get; }
 

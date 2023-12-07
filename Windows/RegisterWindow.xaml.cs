@@ -11,59 +11,59 @@ namespace GreenThumbProject.Windows
     public partial class RegisterWindow : Window
     {
         private readonly CredentialsValidator _validator;
-        private readonly GreenThumbUOW _unitOfWork;
+
         public RegisterWindow()
         {
             InitializeComponent();
-            MyDBContext context = new MyDBContext();
-            _unitOfWork = new GreenThumbUOW(context);
             _validator = new CredentialsValidator();
         }
 
-        private async void btnregister_Click(object sender, RoutedEventArgs e)
+        private async Task btnregister_Click(object sender, RoutedEventArgs e)
         {
-            string username = txtUsername.Text;
-            string password = txtPassword.Text;
-            bool usernameIsMinimumFiveChars = _validator.LengthRequirementAchieved(username);
-            bool passwordIsMinimumFiveChars = _validator.LengthRequirementAchieved(password);
-            bool usernameContainsAtLeastOneNbr = _validator.ContainsAtLeastOneNumber(username);
-            bool passwordContainsAtLeastOneNbr = _validator.ContainsAtLeastOneNumber(password);
-
-            if (usernameIsMinimumFiveChars && passwordIsMinimumFiveChars && usernameContainsAtLeastOneNbr && passwordContainsAtLeastOneNbr)
+            using (var context = new MyDBContext())
             {
-                bool nameIsAvailable = await _unitOfWork.UserRepository.UserNameIsAvailableAsync(username);
-                if (nameIsAvailable)
+                GreenThumbUOW _unitOfWork = new GreenThumbUOW(context);
+
+                string username = txtUsername.Text;
+                string password = txtPassword.Text;
+                bool usernameIsMinimumFiveChars = _validator.LengthRequirementAchieved(username);
+                bool passwordIsMinimumFiveChars = _validator.LengthRequirementAchieved(password);
+                bool usernameContainsAtLeastOneNbr = _validator.ContainsAtLeastOneNumber(username);
+                bool passwordContainsAtLeastOneNbr = _validator.ContainsAtLeastOneNumber(password);
+
+                if (usernameIsMinimumFiveChars && passwordIsMinimumFiveChars && usernameContainsAtLeastOneNbr && passwordContainsAtLeastOneNbr)
                 {
-                    User newUser = new User();
-                    newUser.UserName = username;
-                    newUser.Password = password;
-                    await _unitOfWork.UserRepository.AddAsync(newUser);
-                    await _unitOfWork.Complete();
+                    bool nameIsAvailable = await _unitOfWork.UserRepository.UserNameIsAvailableAsync(username);
+                    if (nameIsAvailable)
+                    {
+                        User newUser = new User();
+                        newUser.UserName = username;
+                        newUser.Password = password;
+                        await _unitOfWork.UserRepository.AddAsync(newUser);
+                        await _unitOfWork.Complete();
 
-                    Garden newGarden = new Garden();
-                    newGarden.Name = username + "'s" + " garden";
-                    newGarden.UserId = newUser.UserId;
-                    await _unitOfWork.GardenRepository.AddAsync(newGarden);
-                    await _unitOfWork.Complete();
+                        Garden newGarden = new Garden();
+                        newGarden.Name = username + "'s" + " garden";
+                        newGarden.UserId = newUser.UserId;
+                        await _unitOfWork.GardenRepository.AddAsync(newGarden);
+                        await _unitOfWork.Complete();
 
-                    MessageBox.Show("New user: " + newUser.UserName + " registered with new garden: " + newGarden.Name);
+                        MessageBox.Show("New user: " + newUser.UserName + " registered with new garden: " + newGarden.Name);
+                        txtPassword.Text = "";
+                        txtUsername.Text = "";
+                    }
+                    else if (!nameIsAvailable)
+                    {
+                        MessageBox.Show("That username already exists, please try again.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Username and password must be at least 5 characters long and contain at least 1 number.");
                     txtPassword.Text = "";
                     txtUsername.Text = "";
-
                 }
-                else if (!nameIsAvailable)
-                {
-                    MessageBox.Show("That username already exists, please try again.");
-                }
-
             }
-            else
-            {
-                MessageBox.Show("Username and password must be at least 5 characters long and contain at least 1 number.");
-                txtPassword.Text = "";
-                txtUsername.Text = "";
-            }
-
         }
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
