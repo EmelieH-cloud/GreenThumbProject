@@ -8,6 +8,26 @@
         Title="PlantDetailsWindow" Height="480" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Width="700" WindowStyle="None"  AllowsTransparency="True" Background="Transparent">
     <Window.Resources>
         <BitmapImage x:Key="plantdetail" UriSource="C:\Users\User\repos\Newton\GreenThumbProject\monstera.jpg"/>
+        <Style x:Key="Buttons" TargetType="Button">
+            <Setter Property="Width" Value="160"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Foreground" Value="MintCream"/>
+            <Setter Property="Background" Value="#FF092A09"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="6" BorderThickness="1" Background="{TemplateBinding Background}" BorderBrush="Transparent" Padding="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="LightSeaGreen"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Border CornerRadius="35" BorderThickness="24">
         <Border.BorderBrush>
@@ -38,7 +58,7 @@
                 </DataGrid.Columns>
             </DataGrid>
             <TextBlock  Margin="10" TextWrapping="Wrap" Height="100" x:Name="txtPlantDetails" Grid.Column="1" Background="white" Grid.RowSpan="2" Grid.Row="3" Grid.ColumnSpan="3"/>
-            <Button x:Name="btnReturn"  Grid.Column="4" Grid.Row="0" Width="70" Height="40" Content="Return" Click="btnReturn_Click" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+            <Button x:Name="btnReturn" Style="{StaticResource Buttons}"  Grid.Column="4" Grid.Row="0" Width="90" Height="60" Content="Return" Click="btnReturn_Click" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14"/>
             <Label x:Name="lblplantName" Content="Plant details: " Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" Foreground="#FFF6EAEA"/>
         </Grid>
     </Border>

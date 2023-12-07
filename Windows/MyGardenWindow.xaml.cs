@@ -146,6 +146,25 @@ namespace GreenThumbProject.Windows
                 }
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            ListViewItem item = (ListViewItem)lstplants.SelectedItem;
+            if (item != null)
+            {
+                PlantGarden pg = (PlantGarden)item.Tag;
+                if (pg != null)
+                {
+                    Plant plantToView = (Plant)pg.Plant;
+                    MessageBox.Show(plantToView.Details);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please choose a plant in the list");
+            }
+        }
     }
 }
 

@@ -46,16 +46,15 @@
     <Border CornerRadius="35" BorderThickness="24">
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#447D58" Offset="0.8"/>
-                <GradientStop Color="#30C364" Offset="0.2"/>
-                <GradientStop Color="#4C6555" Offset="0.4"/>
+                <GradientStop Color="#447D58" Offset="0.6"/>
+                <GradientStop Color="#30C364" Offset="0.4"/>
+                <GradientStop Color="#4C6555" Offset="0.3"/>
             </LinearGradientBrush>
         </Border.BorderBrush>
         <Grid x:Name="LogInGrid">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#447D58" Offset="0.8"/>
-                    <GradientStop Color="#30C364" Offset="0.2"/>
                     <GradientStop Color="#4C6555" Offset="0.4"/>
                 </LinearGradientBrush>
             </Grid.Background>
@@ -81,7 +80,7 @@
             <Label Content="4. Finish" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="5" FontWeight="Bold" Foreground="#FFF9F7F7" FontSize="16"/>
             <TextBox x:Name="txtPlantName"  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Width="230" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <TextBox x:Name="txtDetailsofPlant" Grid.Row="2" Width="230" Background="white" Height="90" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <TextBox x:Name="txtInstructionforPlant" Grid.Row="3" Width="230" Background="white" Height="90" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+            <TextBox x:Name="txtInstructionforPlant" Grid.Row="3" Width="230" Background="white" Height="70" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
             <Label x:Name="lblInstructionsAdded"  Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="3" Content="0 instructions added" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left"/>
             <Button Grid.Column="3" Height="50" Grid.ColumnSpan="2" Grid.Row="4" x:Name="btnAddinstruction" Content="Add instruction" Style="{StaticResource Buttons}" HorizontalAlignment="Left" Background="#FF122273" Click="btnAddinstruction_Click" Width="145"/>
             <Button Grid.Column="1"  Grid.ColumnSpan="2" Width="230" Grid.Row="5" Style="{StaticResource Buttons}" HorizontalAlignment="Center" Content="COMPLETE" Click="FinishButton_Click"/>
