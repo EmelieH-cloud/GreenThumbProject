@@ -33,6 +33,13 @@ namespace GreenThumbProject.Data
             }
         }
 
+        public List<Plant> GetPlantsMatchingString(string searchString)
+        {
+            return _context.Plants
+                .Where(p => p.PlantName.Contains(searchString))
+                .ToList();
+        }
+
         public Plant? GetById(int id)
         {
             return _context.Set<T>().OfType<Plant>().FirstOrDefault(plant => plant.PlantId == id);

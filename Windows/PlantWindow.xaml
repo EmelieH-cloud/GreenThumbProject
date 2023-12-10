@@ -79,7 +79,7 @@
                 </DataGrid.Columns>
             </DataGrid>
             <Label Content="Search plant:" Grid.ColumnSpan="2" FontSize="18" FontWeight="Bold" Foreground="White"/>
-            <TextBox VerticalContentAlignment="Center" HorizontalContentAlignment="Center" x:Name="txtSearchTerm" Grid.Column="0" Grid.ColumnSpan="2" Height="40" VerticalAlignment="Bottom"/>
+            <TextBox VerticalContentAlignment="Center" HorizontalContentAlignment="Center" x:Name="txtSearchTerm" Grid.Column="0" Grid.ColumnSpan="2" Height="40" VerticalAlignment="Bottom" TextChanged="txtSearchTerm_TextChanged"/>
             <Button x:Name="btnSearchPlant" Grid.Column="2" Content="Go" Height="50" Width="60" Style="{StaticResource Buttons}" Click="btnSearchPlant_Click"  FontWeight="Bold" VerticalAlignment="Bottom" BorderBrush="#FF060000"/>
             <Button x:Name="btnDeletePlant" Grid.Column="4" Grid.ColumnSpan="2" Height="50" Width="150" Grid.Row="3" Style="{StaticResource Buttons}" Content="Delete plant" FontSize="14" Click="btnDeletePlant_Click" />
             <Button x:Name="btnDetailsPlant" Grid.Column="4" Grid.ColumnSpan="2" Height="50" Width="150" Grid.Row="4" Style="{StaticResource Buttons}" Content="Plant details" FontSize="14" Click="btnDetailsPlant_Click" VerticalAlignment="Top"/>

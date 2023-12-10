@@ -147,5 +147,27 @@ namespace GreenThumbProject.Windows
             addplantwindow.Show();
             Close();
         }
+
+
+        private void txtSearchTerm_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            string searchString = txtSearchTerm.Text;
+
+            using (var context = new MyDBContext())
+            {
+                GreenThumbUOW _unitOfWork = new GreenThumbUOW(context);
+                List<Plant> matchingPlants = _unitOfWork.PlantRepository.GetPlantsMatchingString(searchString);
+
+                Plants.Clear();
+                foreach (Plant plant in matchingPlants)
+                {
+                    Plants.Add(plant);
+
+                }
+
+            }
+        }
+
     }
+
 }

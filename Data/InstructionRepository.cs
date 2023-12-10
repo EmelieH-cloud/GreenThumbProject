@@ -5,10 +5,13 @@ namespace GreenThumbProject.Data
     public class InstructionRepository<T> where T : class
     {
         private readonly MyDBContext _context;
+        //private readonly DbSet<T> _dbSet;
 
         public InstructionRepository(MyDBContext context)
         {
             _context = context;
+
+            //_dbSet = context.Set<T>();
         }
 
         public T? GetById(int id)
